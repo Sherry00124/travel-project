@@ -1,9 +1,34 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+		
+		<u-tabbar :value="value1" @change="change1" :fixed="false" :placeholder="false" :safeAreaInsetBottom="true"
+			class="tab-bar" activeColor="#55aaff">
+			<u-tabbar-item @click="click12">
+				<div class="tabbar-icon" slot="active-icon">
+					<image class="u-page__item__slot-icon" src="/static/tabbar/shop.svg"></image>
+				</div>
+				<!-- <u-icon slot="inactive-icon" name="home" size="35"></u-icon> -->
+				<image class="u-page__item__slot-icon" slot="inactive-icon" src="/static/tabbar/in_home.svg"></image>
+			</u-tabbar-item>
+			<u-tabbar-item @click="click12">
+				<div class="tabbar-icon" slot="active-icon">
+					<image class="u-page__item__slot-icon" src="/static/tabbar/ac_transfer.svg"></image>
+				</div>
+				<image class="u-page__item__slot-icon" slot="inactive-icon" src="/static/tabbar/in_transfer.svg"></image>
+			</u-tabbar-item>
+			<u-tabbar-item @click="click12">
+				<div class="tabbar-icon" slot="active-icon">
+					<image class="u-page__item__slot-icon" src="/static/tabbar/ac_gift.svg"></image>
+				</div>
+				<image class="u-page__item__slot-icon" slot="inactive-icon" src="/static/tabbar/in_gift.svg"></image>
+			</u-tabbar-item>
+			<u-tabbar-item @click="click12" class="mine">
+				<div class="tabbar-icon" slot="active-icon">
+					<image class="u-page__item__slot-icon" src="/static/tabbar/ac_mine.svg"></image>
+				</div>
+				<image class="u-page__item__slot-icon" slot="inactive-icon" src="/static/tabbar/in_mine.svg"></image>
+			</u-tabbar-item>
+		</u-tabbar>
 	</view>
 </template>
 
