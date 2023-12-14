@@ -1,17 +1,61 @@
 {
+	"easycom": {
+			"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+		},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+
+	    {
+            "path" : "pages/index/shop",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/user",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/guide",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle" : {
+	    "navigationBarTextStyle" : "black",
+	    "navigationBarBackgroundColor" : "#FFFFFF",
+	    "backgroundColor" : "#FFFFFF",
+	    "navigationStyle" : "custom",
+	    "app-plus" : {
+	        "titleView" : false,
+	        "statusbar" : {
+	            "immersed" : false
+	        },
+			"animationType": "pop-in",
+			"animationDuration": 300
+	    }
 	},
+	"tabBar": {
+			"custom":true,
+			"list": [{
+				"pagePath": "pages/index/guide"
+			}, {
+				"pagePath": "pages/index/shop"
+			},
+			{
+				"pagePath": "pages/index/user"
+			}]
+		},
 	"uniIdRouter": {}
 }
