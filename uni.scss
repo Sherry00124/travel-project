@@ -15,7 +15,15 @@
 /* 颜色变量 */
 /* uni.scss */
 @import 'uview-ui/theme.scss';
-
+.container{
+	background: url('/static/shop/bg.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 40rpx;
+	height: 424rpx;
+	width: 750rpx;
+	position: fixed;
+}
 /* 行为相关颜色 */
 $uni-color-primary: #007aff;
 $uni-color-success: #4cd964;

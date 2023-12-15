@@ -1,5 +1,5 @@
 <template>
-	<view class="shop">
+	<view class="container shop">
 		<view class="shop-top">
 			<u-grid :border="false" @click="chooseType" col="5">
 				<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
@@ -52,11 +52,7 @@
 
 <style lang="scss">
 .shop{
-	background: url('/static/shop/bg.svg');
-	background-repeat: no-repeat;
-	background-size: cover;
 	padding: 40rpx;
-	height: 424rpx;
 	&-top{
 		border-radius: 16rpx 16rpx 16rpx 16rpx;
 		padding: 38rpx 46rpx;

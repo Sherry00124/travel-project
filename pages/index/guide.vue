@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="container">
 
 		攻略
 		<tabbar :currentTab='1'/>

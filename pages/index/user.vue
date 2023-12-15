@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="container">
 		个人中心
 		<tabbar :currentTab='2'/>
 	</view>
