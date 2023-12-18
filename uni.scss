@@ -16,13 +16,36 @@
 /* uni.scss */
 @import 'uview-ui/theme.scss';
 .container{
-	background: url('/static/shop/bg.svg');
+	background-image: url('/static/shop/bg.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	padding: 40rpx;
-	height: 424rpx;
+	z-index: 1;
+	height: 100vh;
 	width: 750rpx;
-	position: fixed;
+	// position: absolute;
+}
+// .bgColor{
+// 	position: absolute;
+// 	top: 424rpx;
+// 	background-color: #F6F6F6;
+// 	// height: 100vh;
+// 	z-index: -1;
+// }
+	.u-tabbar__content__item-wrapper{
+		height: 168rpx !important;
+		
+	}
+.flex-row{
+	display: flex;
+	
+}
+.flex-column{
+	display: flex;
+	flex-direction: column;
+}
+.flex-between{
+	display: flex;
+	justify-content: space-between;
 }
 /* 行为相关颜色 */
 $uni-color-primary: #007aff;
