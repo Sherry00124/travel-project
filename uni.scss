@@ -24,13 +24,9 @@
 	width: 750rpx;
 	position: absolute;
 }
-// .bgColor{
-// 	position: absolute;
-// 	top: 424rpx;
-// 	background-color: #F6F6F6;
-// 	// height: 100vh;
-// 	z-index: -1;
-// }
+.line{
+	height: 32rpx;border:solid 2rpx #D9D9D9
+}
 	.u-tabbar__content__item-wrapper{
 		height: 168rpx !important;
 		

@@ -17,9 +17,12 @@
 					<text>成人×{{adultsNum}}</text>
 					<text>儿童×{{childNum}}</text>
 				</view>
-				<view class="order-info-warning">
-					<u-icon name="checkmark-circle"
-						color="#AEAEB2"></u-icon>二次确认：此订单支付后还需要二次确认，商家将4个工作小时内（工作日9:00-18:00）确认是否预订成功
+				<view class="order-info-warning flex-column">
+					<view class="flex-row">
+						<u-icon name="checkmark-circle" color="#AEAEB2"></u-icon>
+						<text>二次确认：此订单支付后还需要二次确认，商家将4个工作</text>
+					</view>
+					<text>小时内（工作日9:00-18:00）确认是否预订成功</text>
 				</view>
 				<u-line></u-line>
 				<view class="order-info-refund flex-between">
