@@ -1,8 +1,9 @@
 <template>
-	<view class="container">
+	<view class="">
+		<view class="container"></view>
 		<view class="guide">
 			<scroll-view scroll-y="true" class="scroll-view">
-			<u-grid :border="false" @click="chooseType" col="2">
+			<u-grid :border="false" @click="choose" col="2">
 				
 					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
 						<view class="guide-item">
@@ -57,7 +58,11 @@
 			}
 		},
 		methods: {
-			
+			choose(){
+				uni.navigateTo({
+					url:'/pages/guide/guide'
+				})
+			}
 		},
 		mounted() {
 			uni.hideTabBar()
@@ -68,6 +73,7 @@
 <style lang="scss">
 .guide{
 	padding: 40rpx;
+	background-color: #F8F8F8;
 	&-item{
 		background-color: #fff;
 		width: 270rpx;

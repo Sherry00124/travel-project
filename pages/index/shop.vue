@@ -1,6 +1,7 @@
 <template>
-	<view class="container bgColor">
-		<view class="shop">
+	<view class="">
+		<view class="container"></view>
+		<view class="shop flex-column">
 			<view class="shop-top">
 				<u-grid :border="false" @click="chooseType" col="5">
 					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
@@ -15,7 +16,8 @@
 						<img :src="item.src" alt="" width="100rpx" class=" shop-body-item-img">
 						<view class="flex-column">
 							<text class="shop-body-item-title">{{item.title}}</text>
-							<text class="shop-body-item-price">￥<text style="font-size: 24rpx;">{{item.price}}</text>起</text>
+							<text class="shop-body-item-price">￥<text
+									style="font-size: 24rpx;">{{item.price}}</text>起</text>
 							<view class="flex-between shop-body-item-bottom">
 								<view class="flex-row">
 									<u-icon name="/static/shop/shop.svg" :size="16"></u-icon>
@@ -35,7 +37,7 @@
 				</scroll-view>
 			</view>
 		</view>
-		<firstAid/>
+		<firstAid />
 		<tabbar :currentTab='0' />
 	</view>
 </template>
@@ -72,44 +74,45 @@
 					title: '【春节旅游】斯里兰卡全景6-9天跟团游·狮子岩/康提/南部海域等10个...',
 					institute: '世界风情假期',
 					price: '2500',
-					comments:23,
-					sold:12
+					comments: 23,
+					sold: 12
 
-				},{
+				}, {
 					src: '/static/edit/pic.svg',
 					title: '【春节旅游】斯里兰卡全景6-9天跟团游·狮子岩/康提/南部海域等10个...',
 					institute: '世界风情假期',
 					price: '2500',
-					comments:23,
-					sold:12
+					comments: 23,
+					sold: 12
 
-				},{
+				}, {
 					src: '/static/edit/pic.svg',
 					title: '【春节旅游】斯里兰卡全景6-9天跟团游·狮子岩/康提/南部海域等10个...',
 					institute: '世界风情假期',
 					price: '2500',
-					comments:23,
-					sold:12
+					comments: 23,
+					sold: 12
 
-				},{
+				}, {
 					src: '/static/edit/pic.svg',
 					title: '【春节旅游】斯里兰卡全景6-9天跟团游·狮子岩/康提/南部海域等10个...',
 					institute: '世界风情假期',
 					price: '2500',
-					comments:23,
-					sold:12
+					comments: 23,
+					sold: 12
 
-				} ]
+				}]
 			}
 		},
 		methods: {
 			chooseType() {
 
-			},toDetails(){
+			},
+			toDetails() {
 				uni.navigateTo({
-					url:'/pages/shop/shop'
+					url: '/pages/shop/shop'
 				})
-				}
+			}
 		},
 		mounted() {
 			uni.hideTabBar()
@@ -119,18 +122,16 @@
 
 <style lang="scss">
 	.shop {
-		position: absolute;
 		padding: 40rpx;
-		display: flex;
-		flex-direction: column;
 		align-items: center;
-
+		background-color: #F8F8F8;
 
 		&-top {
 			border-radius: 16rpx 16rpx 16rpx 16rpx;
 			padding: 38rpx 46rpx;
 			width: 88%;
 			background-color: #fff;
+			z-index: 2;
 		}
 
 		&-body {
@@ -171,13 +172,13 @@
 					/* 限制显示的行数 */
 					margin: 16rpx 0;
 				}
-				
-				&-num{
-					font-size: 24rpx;					
+
+				&-num {
+					font-size: 24rpx;
 					color: #FACC15;
 				}
-				
-				&-bottom{
+
+				&-bottom {
 					margin-top: 16rpx;
 				}
 			}

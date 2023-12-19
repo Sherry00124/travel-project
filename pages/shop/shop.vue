@@ -1,13 +1,13 @@
 <template>
-	<view class="container ">
+	<view class=" ">
+		<view class="container"></view>
 		<view class="shop flex-column">
-			<u-navbar :title="title" @rightClick="rightClick" :autoBack="true" bgColor="transparent">
+
+			<u-navbar :title="title" :autoBack="true" bgColor="transparent">
 			</u-navbar>
 			<view class="shop-body">
 				<u-swiper :list="list" height="300" :autoplay="false">
-			
 				</u-swiper>
-			
 			</view>
 			<view class="shop-details flex-column">
 				<view class="shop-details-price flex-row">
@@ -27,7 +27,7 @@
 						<view class="" style="margin-right: 5rpx;">
 							<u-icon name="/static/shop/location.svg" size="23"></u-icon>
 						</view>
-			
+
 						<text>成都出发</text>
 					</view>
 					<text style="font-weight: 600;">更改出发地></text>
@@ -51,17 +51,20 @@
 						<text>更多日期</text>
 					</view>
 				</view>
-			
-			
+
+
 			</view>
-			
+			<view class="shop-content">
+				<view class="">产品详情</view>
+				<mp-html :content="content" />
+			</view>
 		</view>
 		<view class="shop-tabbar flex-row">
 			<view class="shop-tabbar-icon flex-between">
 				<u-icon name="/static/details/firstAid.svg" size="30"></u-icon>
 				<u-icon name="/static/details/share.svg" size="30"></u-icon>
 			</view>
-			<button style="background-color: #FACC15;height: 80rpx;width: 60%;border-radius: 20rpx;border: none;">立即购买</button>
+			<button class="shop-tabbar-button" @click="buyNow">立即预约</button>
 		</view>
 	</view>
 </template>
@@ -103,11 +106,16 @@
 						date: "12-21",
 						price: 4500
 					}
-				]
+				],
+				content: "<div>1、私家小团，升级服务，1单1团，专车专导，微信管家服务。2、鼓浪屿特别体验1晚地标住宿，更多时间留给您，留给鼓浪屿，Feeling倍儿爽3、行程涵盖福建全线精华景点，一次出游，不留任何遗憾，无购物无自费4、走法设计舒适合理，符合人体运动技能，深度畅玩福建，拒绝常规旅游弊病“走马观花旅游模式</div>"
 			}
 		},
 		methods: {
-
+			buyNow() {
+				uni.navigateTo({
+					url: '/pages/order/order-confirm'
+				})
+			}
 		}
 	}
 </script>
@@ -115,6 +123,7 @@
 <style lang="scss">
 	.shop {
 		padding: 40rpx;
+		background-color: #F8F8F8;
 
 		&-body {
 			margin-top: 100rpx;
@@ -155,6 +164,18 @@
 			}
 		}
 
+		&-content {
+			background-color: #fff;
+			border-radius: 16rpx;
+			height: 200rpx;
+			margin-top: 30rpx;
+			font-weight: bold;
+			font-size: 30rpx;
+			padding: 40rpx;
+			width: 750rpx;
+			margin-left: -40rpx;
+		}
+
 		&-date {
 			background-color: #ffffff;
 			border-radius: 16rpx;
@@ -192,15 +213,25 @@
 				padding: 16rpx;
 			}
 		}
-		&-tabbar{
+
+		&-tabbar {
 			position: fixed;
 			bottom: 0;
-			height: 100rpx;
+			height: 120rpx;
 			width: 750rpx;
 			background-color: #fff;
 			padding: 0 40rpx;
-			&-icon{
+
+			&-icon {
 				width: 20%
+			}
+
+			&-button {
+				background-color: #FACC15;
+				height: 90rpx;
+				width: 60%;
+				margin-top: 15rpx;
+				border-radius: 20rpx;
 			}
 		}
 	}

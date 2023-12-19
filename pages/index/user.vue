@@ -1,5 +1,6 @@
 <template>
-	<view class="container">
+	<view class="">
+		<view class="container"></view>
 		<view class="user flex-column">
 			<scroll-view scroll-y="true" class="scroll-view">
 				<view class="user-item" v-for="(item,index) in list">
@@ -86,7 +87,7 @@
 <style lang="scss">
 	.user {
 		padding: 40rpx;
-
+background-color: #F8F8F8;
 		&-item {
 			background-color: #fff;
 			border-radius: 16rpx;
