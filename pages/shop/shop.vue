@@ -2,11 +2,10 @@
 	<view class=" ">
 		<view class="container"></view>
 		<view class="shop flex-column">
-
 			<u-navbar :title="title" :autoBack="true" bgColor="transparent">
 			</u-navbar>
 			<view class="shop-body">
-				<u-swiper :list="list" height="300" :autoplay="false">
+				<u-swiper :list="list" height="300" :autoplay="true" :indicator="true" indicatorMode="dot">
 				</u-swiper>
 			</view>
 			<view class="shop-details flex-column">
@@ -30,7 +29,7 @@
 
 						<text>成都出发</text>
 					</view>
-					<text style="font-weight: 600;">更改出发地></text>
+					<text style="font-weight: 500;" @click="toCalendar">更改出发地></text>
 				</view>
 				<view class="flex-between">
 					<view class="shop-date-left flex-row">
@@ -46,7 +45,7 @@
 							</view>
 						</view>
 					</view>
-					<view class="flex-column shop-date-right">
+					<view class="flex-column shop-date-right" @click="toCalendar">
 						<u-icon name="/static/details/date.svg" size="23"></u-icon>
 						<text>更多日期</text>
 					</view>
@@ -56,7 +55,7 @@
 			</view>
 			<view class="shop-content">
 				<view class="">产品详情</view>
-				<mp-html :content="content" />
+				<!-- <mp-html :content="content" /> -->
 			</view>
 		</view>
 		<view class="shop-tabbar flex-row">
@@ -114,6 +113,11 @@
 			buyNow() {
 				uni.navigateTo({
 					url: '/pages/order/order-confirm'
+				})
+			},
+			toCalendar(){
+				uni.navigateTo({
+					url: '/pages/date/date'
 				})
 			}
 		}
@@ -180,7 +184,6 @@
 			background-color: #ffffff;
 			border-radius: 16rpx;
 			margin-top: 30rpx;
-			// width: 90%;
 			font-weight: bold;
 			padding: 16rpx;
 
@@ -198,12 +201,10 @@
 				background-color: #fff;
 				font-size: 20rpx;
 				padding: 10rpx 0 10rpx 20rpx;
-				// align-items: center;
 				justify-content: center;
 			}
 
 			&-item {
-
 				background: #F8F8F8;
 				border-radius: 16rpx;
 				margin-right: 10rpx;
