@@ -77,6 +77,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/protocols/protocols",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

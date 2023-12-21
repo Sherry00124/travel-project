@@ -286,11 +286,9 @@
 			/**
 			 * 选择月份触发
 			 */
-			monthSwitch() {
-				let {
-					year,
-					month
-				} = this.nowDate
+			monthSwitch(year,month) {
+				let {date} = this.nowDate
+				this.setDate(year+'-'+month+'-'+date)
 				this.$emit('monthSwitch', {
 					year,
 					month: Number(month)
@@ -369,6 +367,7 @@
 			 * @param {Object} date
 			 */
 			setDate(date) {
+				console.log(date)
 				this.cale.setDate(date)
 				this.weeks = this.cale.weeks
 				this.nowDate = this.cale.getInfo(date)

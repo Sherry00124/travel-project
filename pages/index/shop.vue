@@ -13,7 +13,13 @@
 			<view class="shop-body">
 				<scroll-view scroll-y="true" class="scroll-view">
 					<view class="flex-row shop-body-item" v-for="(item,index) in list" @click="toDetails">
-						<img :src="item.src" alt="" width="100rpx" class=" shop-body-item-img">
+						<view class="shop-body-img">
+							<img :src="item.src" alt="" class="shop-body-item-img">
+							<view class="shop-body-departures">
+								{{item.productDepartures}}
+							</view>
+							<view class="shop-body-tourType">{{item.tourType}}</view>
+						</view>
 						<view class="flex-column">
 							<text class="shop-body-item-title">{{item.title}}</text>
 							<text class="shop-body-item-price">￥<text
@@ -25,9 +31,9 @@
 								</view>
 								<view class="flex-row" style="font-size: 24rpx;">
 									<text class="shop-body-item-num">{{item.comments}}</text>
-									评价
+									<text style="margin-right: 5rpx;">评价</text>
 									<text class="shop-body-item-num">{{item.sold}}</text>
-									已售
+									<text>已售</text>
 								</view>
 							</view>
 
@@ -48,8 +54,7 @@
 			return {
 				baseList: [{
 						name: '/static/shop/ticket.svg',
-						title: '门票',
-
+						title: '门票'
 
 					},
 					{
@@ -67,6 +72,7 @@
 					{
 						name: '/static/shop/free.svg',
 						title: '自由行'
+
 					},
 				],
 				list: [{
@@ -75,7 +81,9 @@
 					institute: '世界风情假期',
 					price: '2500',
 					comments: 23,
-					sold: 12
+					sold: 12,
+					productDepartures: "成都直飞",
+					tourType: "出境跟团游",
 
 				}, {
 					src: '/static/edit/pic.svg',
@@ -83,7 +91,9 @@
 					institute: '世界风情假期',
 					price: '2500',
 					comments: 23,
-					sold: 12
+					sold: 12,
+					productDepartures: "成都直飞",
+					tourType: "境内更团游",
 
 				}, {
 					src: '/static/edit/pic.svg',
@@ -91,7 +101,9 @@
 					institute: '世界风情假期',
 					price: '2500',
 					comments: 23,
-					sold: 12
+					sold: 12,
+					productDepartures: "成都直飞",
+					tourType: "出境跟团游",
 
 				}, {
 					src: '/static/edit/pic.svg',
@@ -99,7 +111,9 @@
 					institute: '世界风情假期',
 					price: '2500',
 					comments: 23,
-					sold: 12
+					sold: 12,
+					productDepartures: "成都直飞",
+					tourType: "出境跟团游",
 
 				}]
 			}
@@ -137,6 +151,34 @@
 		&-body {
 			margin-top: 28rpx;
 			width: 100%;
+			&-img {
+				position: relative;
+				border-radius: 16rpx 16rpx 16rpx 16rpx;
+				
+				margin-right: 20rpx;
+			}
+			&-departures {
+				position: absolute;
+				top: 0;
+				left: 0;
+				background: rgba(0, 0, 0, 0.5);
+				border-radius: 16rpx 0rpx 16rpx 0rpx;
+				color: #fff;
+				font-size: 22rpx;
+				padding: 8rpx;
+			}
+
+			&-tourType {
+				position: absolute;
+				bottom: 5rpx;
+				background: rgba(0, 0, 0, 0.5);
+				border-radius: 0rpx 0rpx 16rpx 16rpx;
+				color: #fff;
+				width: 100%;
+				font-size: 22rpx;
+				padding: 8rpx 0;
+				text-align: center;
+			}
 
 			&-item {
 				background-color: #fff;
@@ -145,14 +187,16 @@
 				margin-bottom: 28rpx;
 				border-radius: 16rpx;
 
-				&-img {
-					margin-right: 16rpx;
-				}
-
 				&-price {
 					color: #EC1C00;
 					font-size: 20rpx;
 					font-weight: 600;
+				}
+
+				&-img {
+					border-radius: 16rpx 16rpx 16rpx 16rpx;
+					width: 200rpx;
+					height: 200rpx;
 				}
 
 				&-ins {

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<u-navbar :title="title" :autoBack="true" bgColor="transparent"></u-navbar>
+		<u-navbar :title="title" :autoBack="true"></u-navbar>
 		<view class="date">
 			<view class="date-top flex-column">
 				<text class="date-title">日期选择</text>
@@ -18,27 +18,60 @@
 					</view>
 				</view>
 				<view style="width: 750rpx;margin-left: -40rpx;margin-top: 16rpx;">
-					<uni-calendar :insert="true" :lunar="false" @change="change" />
+					<uni-calendar :insert="true" :lunar="false" @change="change" ref="calender" />
 				</view>
 			</view>
 			<view class="date-packages">
 				<text class="date-title">套餐</text>
 				<view class="flex-row" style="margin-top: 16rpx;">
-					<view class="date-packages-item" v-for="(item,index) in packages" >
-						<u-tag :text="item.name" :type="item.ifChoose?'warning':'info'" plain plainFill :color="item.ifChoose?'#FACC15':'#2C2C2E'" :borderColor="item.ifChoose?'#FACC15':'#2C2C2E'" @click="choosePackage(item)"></u-tag>
+					<view class="date-packages-item" v-for="(item,index) in packages">
+						<u-tag :text="item.name" :type="item.ifChoose?'warning':'info'" plain plainFill
+							:color="item.ifChoose?'#FACC15':'#2C2C2E'" :borderColor="item.ifChoose?'#FACC15':'#2C2C2E'"
+							@click="choosePackage(item)"></u-tag>
 					</view>
 				</view>
 			</view>
-			<view class="" style="margin-top: 16rpx;">
+			<view class="flex-column" style="margin-top: 16rpx;margin-bottom: 150rpx;">
 				<text class="date-title">数量</text>
+				<view class="flex-between" style="margin-top: 16rpx;font-size: 28rpx;">
+					<view class="flex-row">
+						<text>成人</text>
+						<text style="color: #FF4747;">￥{{price.adultPrice}}</text>
+					</view>
+					<u-number-box v-model="adultNum" min="0">
+						<view slot="minus" class="minus">
+							<u-icon name="minus-circle" size="25" :color="adultNum>0?'#FACC15':'#E9EBED'"></u-icon>
+						</view>
+						<text slot="input" style="width: 50rpx;text-align: center;" class="input">{{adultNum}}</text>
+						<view slot="plus" class="plus">
+							<u-icon name="plus-circle" color="#FACC15" size="25"></u-icon>
+						</view>
+					</u-number-box>
+				</view>
+				<view class="flex-between" style="margin-top: 16rpx;">
+					<view class="flex-row">
+						<text>儿童</text>
+						<text style="color: #FF4747;">￥{{price.childPrice}}</text>
+					</view>
+					<u-number-box v-model="childNum" min="0">
+						<view slot="minus" class="minus">
+							<u-icon name="minus-circle" size="25" :color="childNum>1?'#FACC15':'#E9EBED'"></u-icon>
+						</view>
+						<text slot="input" style="width: 50rpx;text-align: center;" class="input">{{childNum}}</text>
+						<view slot="plus" class="plus">
+							<u-icon name="plus-circle" color="#FACC15" size="25"></u-icon>
+						</view>
+					</u-number-box>
+				</view>
 			</view>
 		</view>
 		<view class="date-tabbar flex-between">
 			<view class="date-tabbar-text flex-column">
-				<text>共{{tabbar.total}}人</text>
+				<text>共{{adultNum+childNum}}人</text>
 				<view class="flex-row" style="margin-top: 12rpx;">
 					<text>总计</text>
-					<text style="color: #FF4747;margin-right: 10rpx;">￥{{tabbar.price}}</text>
+					<text
+						style="color: #FF4747;margin-right: 10rpx;">￥{{price.childPrice*childNum+price.adultPrice*adultNum}}</text>
 				</view>
 			</view>
 			<button class="date-tabbar-button" @click="buyNow">立即购买</button>
@@ -57,56 +90,69 @@
 					insert: false,
 					selected: [],
 				},
+				adultNum: 0,
+				childNum: 0,
+				price: {
+					childPrice: 2500,
+					adultPrice: 4500
+				},
 				tabbar: {
 					total: 2,
 					price: 6500,
 				},
-				packages: [
-				{
+				packages: [{
 					name: '成都直飞',
-					ifChoose:true,
+					ifChoose: true,
 				}, {
 					name: '厦门直飞',
-					ifChoose:false,
+					ifChoose: false,
 				}],
 				dayList: [{
+						year: 2023,
 						month: '12',
 						price: '2000',
 						disabled: false,
 						ifChoose: true
 					}, {
+						year: 2024,
 						month: '01',
 						price: '2000',
 						disabled: false,
 						ifChoose: false
 					}, {
+						year: 2024,
 						month: '02',
 						price: '2000',
 						disabled: false,
 						ifChoose: false
 					}, {
+						year: 2024,
 						month: '03',
 						price: '2000',
 						disabled: true,
 						ifChoose: false
 					}, {
+						year: 2024,
 						month: '04',
 						price: '2000',
 						disabled: false,
 						ifChoose: false
 					}, {
+						year: 2024,
 						month: '05',
 						price: '2000',
 						disabled: false,
 						ifChoose: false
 					},
 					{
+						year: 2024,
 						month: '06',
 						price: '2000',
 						disabled: false,
 						ifChoose: false
 					}
-				]
+				],
+				value: 1
 			};
 		},
 		methods: {
@@ -119,17 +165,18 @@
 						date.ifChoose = false
 					})
 					item.ifChoose = true
+					this.$refs.calender.monthSwitch(item.year, item.month)
 				}
 			},
 			choosePackage(item) {
-				this.packages.forEach(item=>{
+				this.packages.forEach(item => {
 					item.ifChoose = false
 				})
 				item.ifChoose = true
 			},
-			buyNow(){
+			buyNow() {
 				uni.navigateTo({
-					url:'/pages/order/order-confirm'
+					url: '/pages/order/order-confirm'
 				})
 			}
 		}
@@ -174,11 +221,13 @@
 				}
 			}
 		}
-		&-packages{
-			&-item{
+
+		&-packages {
+			&-item {
 				margin-right: 16rpx;
 			}
 		}
+
 		&-tabbar {
 			position: fixed;
 			bottom: 0;

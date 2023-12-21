@@ -23,10 +23,28 @@
 				<view class="flex-column">
 					<u-button @click="login"
 						style="background-color: #FACC15;border-radius: 50rpx;margin-top: 40rpx;">注册</u-button>
+					<view class="login-text">
+						<view class="flex-row" width="10rpx">
+							<view class="" style="margin-right: 10rpx;">
+								<u-icon name="/static/order/check.svg" v-if="!ifCheck" @click="ifCheck=!ifCheck"></u-icon>
+								<u-icon name="/static/order/checked.svg" v-else @click="ifCheck=!ifCheck"></u-icon>
+							</view>
+							我已阅读并同意
+							<a href="" style="color: #55aaff; text-decoration: none;" @click="toProtocol">
+								<<用户注册协议>>
+							</a>
+							并授权使
+						</view>
+
+						
+						用该账户信息(如昵称、头像)进行统一管理
+					</view>
 					<view style="margin: 20rpx 0;">
 						<u-line></u-line>
 					</view>
 					<u-button @click="register" style="border-radius: 50rpx;">登录</u-button>
+
+
 				</view>
 			</view>
 		</view>
@@ -52,7 +70,8 @@
 						message: '请输入密码',
 						trigger: ['blur', 'change']
 					}]
-				}
+				},
+				ifCheck: false,
 			};
 		},
 		methods: {
@@ -63,11 +82,21 @@
 			},
 			login() {
 				this.$refs.uForm.validate().then(res => {
-					uni.switchTab({
-						url:'/pages/index/shop'
-					})
+					if (this.ifCheck) {
+						uni.switchTab({
+							url: '/pages/index/shop'
+						})
+					} else {
+						uni.$u.toast('请勾选用户协议')
+					}
+
 				}).catch(errors => {
 					uni.$u.toast('请输入用户名和密码')
+				})
+			},
+			toProtocol() {
+				uni.navigateTo({
+					url: '/pages/protocols/protocols'
 				})
 			}
 		}
@@ -89,6 +118,12 @@
 			border-radius: 16rpx;
 			padding: 40rpx;
 			width: 80%;
+		}
+
+		&-text {
+			font-size: 25rpx;
+			color: #d3d3d3;
+			margin-top: 20rpx;
 		}
 	}
 </style>

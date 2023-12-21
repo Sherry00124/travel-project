@@ -3,8 +3,7 @@
 		<view class="container"></view>
 		<view class="guide">
 			<scroll-view scroll-y="true" class="scroll-view">
-			<u-grid :border="false" @click="choose" col="2">
-				
+				<u-grid :border="false" @click="choose" col="2">
 					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
 						<view class="guide-item">
 							<img :src="baseListItem.name" alt="" width="100%">
@@ -16,13 +15,11 @@
 							</view>
 						</view>
 					</u-grid-item>
-				
-				
-			</u-grid>
+				</u-grid>
 			</scroll-view>
 		</view>
-		<firstAid/>
-		<tabbar :currentTab='1'/>
+		<firstAid />
+		<tabbar :currentTab='1' />
 	</view>
 </template>
 
@@ -58,9 +55,9 @@
 			}
 		},
 		methods: {
-			choose(){
+			choose() {
 				uni.navigateTo({
-					url:'/pages/guide/guide'
+					url: '/pages/guide/guide'
 				})
 			}
 		},
@@ -71,41 +68,47 @@
 </script>
 
 <style lang="scss">
-.guide{
-	padding: 40rpx;
-	background-color: #F8F8F8;
-	&-item{
-		background-color: #fff;
-		width: 270rpx;
-		margin: 16rpx;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		// align-items: center;
-		border-radius: 16rpx;
-		padding: 16rpx;
-		&-content{
-			font-size: 28rpx;
-			display: -webkit-box;
-			  -webkit-box-orient: vertical;
-			  overflow: hidden;
-			  text-overflow: ellipsis;
-			  -webkit-line-clamp: 2; /* 限制显示的行数 */
-			  margin: 16rpx 0;
+	.guide {
+		padding: 40rpx;
+		background-color: #F8F8F8;
+		margin-bottom: 100rpx;
+		&-item {
+			background-color: #fff;
+			width: 270rpx;
+			margin: 16rpx;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			// align-items: center;
+			border-radius: 16rpx;
+			padding: 16rpx;
 
-		}
-		&-bottom{
-			&-name{
-							  font-size: 24rpx;
+			&-content {
+				font-size: 28rpx;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 2;
+				/* 限制显示的行数 */
+				margin: 16rpx 0;
+
 			}
-			&-avater{
-							  border-radius: 50%;
+
+			&-bottom {
+				&-name {
+					font-size: 24rpx;
+				}
+
+				&-avater {
+					border-radius: 50%;
+				}
 			}
 		}
 	}
-}
-.scroll-view{
-	width: 100%;
-	height: 90vh;
-}
+
+	.scroll-view {
+		width: 100%;
+		height: 90vh;
+	}
 </style>

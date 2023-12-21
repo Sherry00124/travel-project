@@ -112,7 +112,7 @@
 		methods: {
 			buyNow() {
 				uni.navigateTo({
-					url: '/pages/order/order-confirm'
+					url: '/pages/date/date'
 				})
 			},
 			toCalendar(){

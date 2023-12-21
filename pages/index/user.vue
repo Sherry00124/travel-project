@@ -92,6 +92,7 @@
 	.user {
 		padding: 40rpx;
 		background-color: #F8F8F8;
+		margin-bottom: 120rpx;
 
 		&-item {
 			background-color: #fff;
