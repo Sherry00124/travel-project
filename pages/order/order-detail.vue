@@ -52,17 +52,17 @@
 				</view>
 				<u-line></u-line>
 				<view class="flex-between order-cell-item" style="font-weight: 500;font-size: 28rpx;">
-					<view class="flex-row">
+					<view class="flex-row" @click="show=true">
 						<u-icon name="/static/order/msg.svg" size="20"></u-icon>
 						<text>在线咨询</text>
 					</view>
 					<view class="line"></view>
-					<view class="flex-row">
+					<view class="flex-row" @click="show=true">
 						<u-icon name="/static/order/phone.svg" size="20"></u-icon>
 						<text>商家电话</text>
 					</view>
 					<view class="line"></view>
-					<view class="flex-row">
+					<view class="flex-row" @click="show=true">
 						<u-icon name="/static/order/consult.svg" size="20"></u-icon>
 						<text>在线咨询</text>
 					</view>
@@ -106,7 +106,9 @@
 					@click="cancelOrder">取消订单</button>
 			</view>
 		</view>
+		<qrCode :show="show" @close="close"/>
 	</view>
+	
 </template>
 
 <script>
@@ -116,6 +118,7 @@
 				status: "待支付",
 				price: 4500,
 				lastTime: '00:47:44',
+				show:false,
 				object: {
 					title: '[春节区期] 斯里兰卡全景6到0天跟团荡·拥子...',
 					type: '成都 成都直飞',
@@ -141,6 +144,9 @@
 			},
 			cancelOrder() {
 
+			},
+			close(params) {
+				this.show = params
 			}
 		}
 	}

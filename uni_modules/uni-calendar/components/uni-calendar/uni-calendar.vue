@@ -307,7 +307,6 @@
 					lunar,
 					extraInfo
 				} = this.calendar
-				console.log(extraInfo)
 				this.$emit(name, {
 					range: this.cale.multipleStatus,
 					year,

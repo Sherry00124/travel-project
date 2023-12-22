@@ -1,7 +1,14 @@
 import App from './App'
 // main.js
+import config from './common/config.js'
 import uView from "uview-ui";
 Vue.use(uView);
+
+if (process.env.NODE_ENV === 'development') {
+	config.baseURL = ""
+} else {
+	config.baseURL = ""
+}
 
 // #ifndef VUE3
 import Vue from 'vue'

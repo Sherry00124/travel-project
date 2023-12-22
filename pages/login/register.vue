@@ -30,21 +30,15 @@
 								<u-icon name="/static/order/checked.svg" v-else @click="ifCheck=!ifCheck"></u-icon>
 							</view>
 							我已阅读并同意
-							<a href="" style="color: #55aaff; text-decoration: none;" @click="toProtocol">
-								<<用户注册协议>>
-							</a>
-							并授权使
+							<text style="color: #55aaff; text-decoration: none;" @click="toProtocol"><<用户注册协议>></text>
+							并授权该
 						</view>
-
-						
-						用该账户信息(如昵称、头像)进行统一管理
+						账户信息(如昵称、头像)进行统一管理
 					</view>
 					<view style="margin: 20rpx 0;">
 						<u-line></u-line>
 					</view>
 					<u-button @click="register" style="border-radius: 50rpx;">登录</u-button>
-
-
 				</view>
 			</view>
 		</view>

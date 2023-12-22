@@ -97,8 +97,8 @@
 					adultPrice: 4500
 				},
 				tabbar: {
-					total: 2,
-					price: 6500,
+					total: 0,
+					price: 0,
 				},
 				packages: [{
 					name: '成都直飞',
@@ -107,6 +107,7 @@
 					name: '厦门直飞',
 					ifChoose: false,
 				}],
+				location:'成都',
 				dayList: [{
 						year: 2023,
 						month: '12',
@@ -152,12 +153,20 @@
 						ifChoose: false
 					}
 				],
-				value: 1
+				value: 1,
+				chooseDate:''
 			};
 		},
+		mounted(){
+			var today = new Date();
+			var year = today.getFullYear();
+			var month = today.getMonth() + 1; 
+			var day = today.getDate();
+			this.chooseDate=year+'-'+month+'-'+day
+		},
 		methods: {
-			change() {
-
+			change(params) {
+				this.chooseDate = params.fulldate
 			},
 			chooseMonth(item) {
 				if (!item.disabled) {
@@ -175,9 +184,31 @@
 				item.ifChoose = true
 			},
 			buyNow() {
-				uni.navigateTo({
-					url: '/pages/order/order-confirm'
-				})
+				if(this.adultNum+this.childNum>0){
+					let travelMode = ''
+					this.packages.forEach((item)=>{
+						if(item.ifChoose){
+							travelMode = item.name
+						}
+					})
+					let orderInfo = {
+						total:this.price.childPrice*this.childNum+this.price.adultPrice*this.adultNum,
+						adultNum:this.adultNum,
+						childNum:this.childNum,
+						title:this.title,
+						date:this.chooseDate,
+						travelMode:travelMode,
+						location:this.location
+					}
+					uni.navigateTo({
+						url: '/pages/order/order-confirm?orderInfo='+JSON.stringify(orderInfo)
+					})
+				}else{
+					uni.showToast({
+						title:"请添加出行人数",
+						icon:'none'
+					})
+				}
 			}
 		}
 	}

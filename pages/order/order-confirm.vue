@@ -3,26 +3,26 @@
 		<view class="order flex-column">
 			<u-navbar title="订单确认" :autoBack="true"></u-navbar>
 			<view class="order-info flex-column">
-				<text class="order-info-title">{{title}}</text>
+				<text class="order-info-title">{{orderInfo.title}}</text>
 				<view class="order-info-detail flex-row" style="margin-top: 16rpx;">
-					<text>{{location}}</text>
-					<text>{{travelMode}}</text>
+					<text style="margin-right: 10rpx;">{{orderInfo.location}}</text>
+					<text>{{orderInfo.travelMode}}</text>
 				</view>
 				<view class="order-info-detail flex-row">
 					<text>出行日期：</text>
-					<text>{{date}}</text>
+					<text>{{orderInfo.date}}</text>
 				</view>
 				<view class="order-info-detail flex-row">
 					<text>数量：</text>
-					<text>成人×{{adultsNum}}</text>
-					<text>儿童×{{childNum}}</text>
+					<text>成人×{{orderInfo.adultNum}}</text>
+					<text>儿童×{{orderInfo.childNum}}</text>
 				</view>
 				<view class="order-info-warning flex-column">
 					<view class="flex-row">
 						<u-icon name="checkmark-circle" color="#AEAEB2"></u-icon>
-						<text>二次确认：此订单支付后还需要二次确认，商家将4个工作</text>
+						<text>二次确认：此订单支付后还需要二次确认，商家将4个</text>
 					</view>
-					<text>小时内（工作日9:00-18:00）确认是否预订成功</text>
+					<text>工作小时内（工作日9:00-18:00）确认是否预订成功</text>
 				</view>
 				<u-line></u-line>
 				<view class="order-info-refund flex-between">
@@ -39,7 +39,7 @@
 				<u-icon name="/static/order/check.svg" size="20" @click="showCheck=true" v-if="!showCheck"></u-icon>
 				<u-icon name="/static/order/checked.svg" size="20" @click="showCheck=false" v-else></u-icon>
 			</view>
-			<view class="order-cell flex-column">
+			<!-- <view class="order-cell flex-column">
 				<text>出行信息</text>
 				<view class="flex-between" style="margin-top: 36rpx;">
 					<view class="flex-row">
@@ -48,8 +48,7 @@
 					</view>
 					<u-icon name="/static/order/add.svg" size="20"></u-icon>
 				</view>
-			</view>
-
+			</view> -->
 			<view class="order-cell flex-column" style="margin-bottom: 150rpx;">
 				<text>预定人信息</text>
 				<view style="width: 100%;font-weight: 500;font-size: 28rpx;">
@@ -82,10 +81,10 @@
 		</view>
 		<view class="order-tabbar flex-between">
 			<view class="order-tabbar-text flex-column">
-				<text>共{{total}}人</text>
+				<text>共{{orderInfo.adultNum+orderInfo.childNum}}人</text>
 				<view class="flex-row" style="margin-top: 12rpx;">
 					<text>总计</text>
-					<text style="color: #FF4747;margin-right: 10rpx;">￥{{price}}</text>
+					<text style="color: #FF4747;margin-right: 10rpx;">￥{{orderInfo.total}}</text>
 					<view class="flex-row">
 						<text style="color: #FACC15;margin-right: 5rpx;">明细</text>
 						<u-icon name="/static/order/arrow-down.svg" size="10"></u-icon>
@@ -93,8 +92,9 @@
 				</view>
 
 			</view>
-			<button class="order-tabbar-button" @click="buyNow">立即购买</button>
+			<button class="order-tabbar-button" @click="show=true">联系客服下单</button>
 		</view>
+		<qrCode :show="show" @close="close"/>
 	</view>
 </template>
 
@@ -102,23 +102,29 @@
 	export default {
 		data() {
 			return {
-				title: '[春节区期] 斯里兰卡全景6到0天跟团荡·拥子老/康提/南部海流/尼甘布(胎的江树林·海上火车+佛牙奇+加勒古堡+米内日亚公因)',
-				date: "2023-10-28",
 				location: '成都',
 				travelMode: "成都直飞",
-				childNum: 1,
-				adultsNum: 1,
-				total: 2,
-				price: 6500,
 				showCheck: false,
+				show:false,
 				schedule: {
 					name: '',
 					mobile: '',
 					email: '',
 					weChat: '',
 					note: ''
-				}
+				},
+				orderInfo:{}
 			};
+		},
+		methods:{
+			close(params) {
+				this.show = params
+			}
+		},
+		onLoad(params) {
+			
+			this.orderInfo = JSON.parse(params.orderInfo)
+			console.log(this.orderInfo)
 		}
 	}
 </script>
@@ -191,7 +197,7 @@
 
 			&-button {
 				background-color: #FACC15;
-				height: 100rpx;
+				height: 90rpx;
 				width: 288rpx;
 				border-radius: 20rpx;
 				margin-top: 20rpx;

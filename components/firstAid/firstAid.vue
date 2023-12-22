@@ -1,11 +1,7 @@
 <template>
 	<view class="firstAid">
-		<u-icon name="/static/shop/customer.svg" size="35" @click="showQRCode=true"></u-icon>
-		<u-popup :show="showQRCode" @close="close" mode="center" round="16">
-			<view style="height: 400rpx;width: 400rpx;padding: 16rpx;">
-				<text>二维码</text>
-			</view>
-		</u-popup>
+		<u-icon name="/static/shop/customer.svg" size="35" @click="show=true"></u-icon>
+		<qrCode :show="show" @close="close"/>
 	</view>
 </template>
 
@@ -14,12 +10,12 @@
 		name: "firstAid",
 		data() {
 			return {
-				showQRCode: false
+				show: false
 			};
 		},
 		methods: {
-			close() {
-				this.showQRCode = false
+			close(params) {
+				this.show = params
 			}
 		}
 	}
