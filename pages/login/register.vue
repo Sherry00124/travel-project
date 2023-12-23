@@ -13,9 +13,13 @@
 						</u-input>
 					</u-form-item>
 					<u-form-item label="密码" prop="password">
-						<u-input v-model="form.password">
+						<u-input v-model="form.password" :password="password">
 							<template slot="prefix">
 								<u-icon name="lock-fill" size="20"></u-icon>
+							</template>
+							<template slot="suffix">
+								<u-icon name="eye-fill" size="20" v-if="!password" @click="password=!password"></u-icon>
+								<u-icon name="eye-off" size="20" v-else @click="password=!password"></u-icon>
 							</template>
 						</u-input>
 					</u-form-item>
@@ -53,6 +57,7 @@
 					username: '',
 					password: ''
 				},
+				password:true,
 				rules: {
 					username: [{
 						required: true,
