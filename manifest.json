@@ -46,19 +46,16 @@
             "sdkConfigs" : {}
         }
     },
-	"devServer": {
-		"port": 8080,
-		"disableHostCheck": true,
-		"proxy": {
-		"/api": {
-			"target": "http://111.229.146.166/api",
-			"changeOrigin": true,
-			"secure": false,
-			"ws": false,
-			"pathRewrite": {
-				"^/api": "/api"
-			   }
-	      }
+	"h5" : {
+	    "devServer":{
+	        "proxy":{
+	            "^/api":{
+	                "target":"http://111.229.146.166/api",
+	                "ws": true,
+	                "changeOrigin": true,
+	                "pathRewrite":{"^/api":"/api"}
+	            }
+	        }
 	    }
 	},
     /* 快应用特有相关 */

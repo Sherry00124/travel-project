@@ -1,25 +1,19 @@
 import request from '../utils/request.js'
 
-export function register(data) {
+export function getShopList(data) {
 	return new Promise((resolve, reject) => {
 		request({
-			url: `/register`,
-			method: 'POST',
-			data:JSON.stringify(data),
+			url: `/user/shopList`,
 		}).then(res=>{
-			console.log(res)
 			resolve(res.data)
 		})
 	});
 }
 
-export function login(data) {
+export function shopDetail(data) {
 	return new Promise((resolve, reject) => {
 		request({
-			url: `/login`,
-			method: 'POST',
-			data:JSON.stringify(data),
-			loading:true,
+			url: `/user/shopDetail`,
 		}).then(res=>{
 			resolve(res.data)
 		})

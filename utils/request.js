@@ -2,11 +2,11 @@ import config from '../common/config.js'
 // import {getToken} from '@/utils/auth.js'
 export default function request(options) {
 	return new Promise((resolve, reject) => {
-		if(options.loading){
-			uni.showLoading({
-				mask:true,
-			})
-		}
+		// if(options.loading){
+		// 	uni.showLoading({
+		// 		mask:true,
+		// 	})
+		// }
 
 		uni.request({
 			...options,

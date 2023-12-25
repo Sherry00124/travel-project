@@ -79,27 +79,17 @@
 				uni.navigateTo({
 					url: '/pages/login/login'
 				})
-				
 			},
 			login() {
 				this.$refs.uForm.validate().then(res => {
 					if (this.ifCheck) {
-						// uni.switchTab({
-						// 	url: '/pages/index/shop'
-						// })
-						// register(this.form).then(res=>{
-						// 	console.log(res)
-						// })
-						uni.request({
-							url: "http://111.229.146.166/api/register",
-							method: 'POST',
-							data:this.form,
-							success: (res) => {
-								uni.hideLoading()
-								console.log(res)
-								// resolve(res)
-							}
+						register(this.form).then(res=>{
+							console.log(res)
+							uni.switchTab({
+								url: '/pages/index/shop'
+							})
 						})
+						
 					} else {
 						uni.$u.toast('请勾选用户协议')
 					}

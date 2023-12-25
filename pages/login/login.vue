@@ -5,8 +5,8 @@
 			<view class="login-body">
 				<text style="align-items: center;font-size: 40rpx;font-weight: bold;margin-left: 230rpx;">登录</text>
 				<u--form :model="form" :rules="rules" ref="uForm" labelPosition="top" labelWidth="100">
-					<u-form-item label="用户名" prop="username">
-						<u-input v-model="form.username">
+					<u-form-item label="用户名" prop="name">
+						<u-input v-model="form.name">
 							<template slot="prefix">
 								<u-icon name="account-fill" size="20"></u-icon>
 							</template>
@@ -38,16 +38,17 @@
 </template>
 
 <script>
+	import {login}from '@/api/login.js'
 	export default {
 		data() {
 			return {
 				form: {
-					username: '',
+					name: '',
 					password: ''
 				},
 				password:true,
 				rules: {
-					username: [{
+					name: [{
 						required: true,
 						message: '请输入用户名',
 						trigger: ['blur', 'change']
@@ -68,9 +69,13 @@
 			},
 			login() {
 				this.$refs.uForm.validate().then(res => {
-					uni.switchTab({
-						url:'/pages/index/shop'
+					login(this.form).then(res=>{
+						console.log(res)
+						uni.switchTab({
+							url:'/pages/index/shop'
+						})
 					})
+					
 				}).catch(errors => {
 					uni.$u.toast('请输入用户名和密码')
 				})

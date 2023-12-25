@@ -2,7 +2,7 @@
 	<view class="">
 		<view class="container"></view>
 		<view class="guide">
-			<scroll-view scroll-y="true" class="scroll-view">
+			<scroll-view scroll-y="true" class="scroll-view" @scrolltolower="touchBottom">
 				<u-grid :border="false" @click="choose" col="2">
 					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
 						<view class="guide-item">
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+	import {getGuideList} from '@/api/guide.js'
 	export default {
 		data() {
 			return {
@@ -51,13 +52,35 @@
 						name: '/static/edit/pic.svg',
 						title: '巴厘岛 | 总有一个假日要属于bali'
 					},
-				]
+				],
+				pageNum:1,
+				totalPage:1,
+				pageSize:6
 			}
 		},
 		methods: {
 			choose() {
 				uni.navigateTo({
 					url: '/pages/guide/guide'
+				})
+			},
+			touchBottom(){
+				if (this.pageNum >= this.totalPage) {
+					uni.showToast({
+						title:"没有更多",
+						icon:'none'
+					})
+				} else {
+					this.getGuide()
+				}
+			},
+			getGuide(){
+				let page = {
+					page:this.pageNum,
+					perPage:this.pageSize
+				}
+				getGuideList(page).then(res=>{
+					console.log(res)
 				})
 			}
 		},

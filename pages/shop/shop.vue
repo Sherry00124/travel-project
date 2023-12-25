@@ -55,7 +55,7 @@
 			</view>
 			<view class="shop-content">
 				<view class="">产品详情</view>
-				<!-- <mp-html :content="content" /> -->
+				<u-parse :content="content"></u-parse>
 			</view>
 		</view>
 		<view class="shop-tabbar flex-row">
@@ -119,7 +119,15 @@
 				uni.navigateTo({
 					url: '/pages/date/date'
 				})
+			},
+			getShopDetail(id){
+				shopDetail(id).then(res=>{
+					console.log(res)
+				})
 			}
+		},
+		onLoad(option) {
+			this.getShopDetail(option.id)
 		}
 	}
 </script>

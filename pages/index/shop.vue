@@ -11,7 +11,7 @@
 				</u-grid>
 			</view>
 			<view class="shop-body">
-				<scroll-view scroll-y="true" class="scroll-view">
+				<scroll-view scroll-y="true" class="scroll-view" @scrolltolower="touchBottom">
 					<view class="flex-row shop-body-item" v-for="(item,index) in list" @click="toDetails">
 						<view class="shop-body-img">
 							<img :src="item.src" alt="" class="shop-body-item-img">
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+	import {getShopList} from '@/api/shop.js'
 	export default {
 		data() {
 			return {
@@ -115,7 +116,10 @@
 					productDepartures: "成都直飞",
 					tourType: "出境跟团游",
 
-				}]
+				}],
+				pageNum:1,
+				totalPage:1,
+				pageSize:10
 			}
 		},
 		methods: {
@@ -125,6 +129,25 @@
 			toDetails() {
 				uni.navigateTo({
 					url: '/pages/shop/shop'
+				})
+			},
+			touchBottom(){
+				if (this.pageNum >= this.totalPage) {
+					uni.showToast({
+						title:"没有更多",
+						icon:'none'
+					})
+				} else {
+					this.getShopList()
+				}
+			},
+			getShopList(){
+				let page = {
+					page:this.pageNum,
+					perPage:this.pageSize
+				}
+				getShopList(page).then(res=>{
+					console.log(res)
 				})
 			}
 		},

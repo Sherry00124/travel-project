@@ -1,25 +1,20 @@
 import request from '../utils/request.js'
 
-export function register(data) {
+export function getGuideList(data) {
 	return new Promise((resolve, reject) => {
 		request({
-			url: `/register`,
-			method: 'POST',
-			data:JSON.stringify(data),
+			url: `/user/guideList`,
 		}).then(res=>{
-			console.log(res)
 			resolve(res.data)
 		})
 	});
 }
 
-export function login(data) {
+export function guideDetail(data) {
 	return new Promise((resolve, reject) => {
 		request({
-			url: `/login`,
-			method: 'POST',
-			data:JSON.stringify(data),
-			loading:true,
+			url: `/user/guideDetail`,
+			params:data
 		}).then(res=>{
 			resolve(res.data)
 		})
