@@ -5,8 +5,8 @@
 			<view class="login-body">
 				<text style="align-items: center;font-size: 40rpx;font-weight: bold;margin-left: 230rpx;">注册</text>
 				<u--form :model="form" :rules="rules" ref="uForm" labelPosition="top" labelWidth="100">
-					<u-form-item label="用户名" prop="username">
-						<u-input v-model="form.username">
+					<u-form-item label="用户名" prop="name">
+						<u-input v-model="form.name">
 							<template slot="prefix">
 								<u-icon name="account-fill" size="20"></u-icon>
 							</template>
@@ -50,16 +50,17 @@
 </template>
 
 <script>
+	import {register} from '@/api/login'
 	export default {
 		data() {
 			return {
 				form: {
-					username: '',
+					name: '',
 					password: ''
 				},
 				password:true,
 				rules: {
-					username: [{
+					name: [{
 						required: true,
 						message: '请输入用户名',
 						trigger: ['blur', 'change']
@@ -78,12 +79,26 @@
 				uni.navigateTo({
 					url: '/pages/login/login'
 				})
+				
 			},
 			login() {
 				this.$refs.uForm.validate().then(res => {
 					if (this.ifCheck) {
-						uni.switchTab({
-							url: '/pages/index/shop'
+						// uni.switchTab({
+						// 	url: '/pages/index/shop'
+						// })
+						// register(this.form).then(res=>{
+						// 	console.log(res)
+						// })
+						uni.request({
+							url: "http://111.229.146.166/api/register",
+							method: 'POST',
+							data:this.form,
+							success: (res) => {
+								uni.hideLoading()
+								console.log(res)
+								// resolve(res)
+							}
 						})
 					} else {
 						uni.$u.toast('请勾选用户协议')
