@@ -12,28 +12,27 @@
 			</view>
 			<view class="shop-body">
 				<scroll-view scroll-y="true" class="scroll-view" @scrolltolower="touchBottom">
-					<view class="flex-row shop-body-item" v-for="(item,index) in list" @click="toDetails">
+					<view class="flex-row shop-body-item" v-for="(item,index) in list" @click="toDetails(item.id)">
 						<view class="shop-body-img">
-							<img :src="item.src" alt="" class="shop-body-item-img">
+							<img :src="item.images" alt="" class="shop-body-item-img">
 							<view class="shop-body-departures">
-								{{item.productDepartures}}
+								成都直飞
 							</view>
-							<view class="shop-body-tourType">{{item.tourType}}</view>
+							<view class="shop-body-tourType">出境跟团游</view>
 						</view>
 						<view class="flex-column">
-							<text class="shop-body-item-title">{{item.title}}</text>
-							<text class="shop-body-item-price">￥<text
-									style="font-size: 24rpx;">{{item.price}}</text>起</text>
+							<text class="shop-body-item-title">{{item.name}}</text>
+							<text class="shop-body-item-price">￥{{item.product_price}}起</text>
 							<view class="flex-between shop-body-item-bottom">
 								<view class="flex-row">
 									<u-icon name="/static/shop/shop.svg" :size="16"></u-icon>
-									<text class="shop-body-item-ins">{{item.institute}}</text>
+									<text class="shop-body-item-ins">世界风情假期</text>
 								</view>
-								<view class="flex-row" style="font-size: 24rpx;">
-									<text class="shop-body-item-num">{{item.comments}}</text>
-									<text style="margin-right: 5rpx;">评价</text>
-									<text class="shop-body-item-num">{{item.sold}}</text>
-									<text>已售</text>
+								<view class="flex-row" style="font-size: 24rpx;margin-left: 50rpx;">
+									<!-- <text class="shop-body-item-n'um">{{item.scores}}</text> -->
+									<text style="margin-right: 5rpx;">评分</text>
+									<text class="shop-body-item-num">{{item.scores}}</text>
+									<!-- <text>已售</text> -->
 								</view>
 							</view>
 
@@ -45,11 +44,13 @@
 		</view>
 		<firstAid />
 		<tabbar :currentTab='0' />
+		<ICP/>
 	</view>
 </template>
 
 <script>
 	import {getShopList} from '@/api/shop.js'
+	import {getNav}from '@/api/nav.js'
 	export default {
 		data() {
 			return {
@@ -76,59 +77,20 @@
 
 					},
 				],
-				list: [{
-					src: '/static/edit/pic.svg',
-					title: '【春节旅游】斯里兰卡全景6-9天跟团游·狮子岩/康提/南部海域等10个...',
-					institute: '世界风情假期',
-					price: '2500',
-					comments: 23,
-					sold: 12,
-					productDepartures: "成都直飞",
-					tourType: "出境跟团游",
-
-				}, {
-					src: '/static/edit/pic.svg',
-					title: '【春节旅游】斯里兰卡全景6-9天跟团游·狮子岩/康提/南部海域等10个...',
-					institute: '世界风情假期',
-					price: '2500',
-					comments: 23,
-					sold: 12,
-					productDepartures: "成都直飞",
-					tourType: "境内更团游",
-
-				}, {
-					src: '/static/edit/pic.svg',
-					title: '【春节旅游】斯里兰卡全景6-9天跟团游·狮子岩/康提/南部海域等10个...',
-					institute: '世界风情假期',
-					price: '2500',
-					comments: 23,
-					sold: 12,
-					productDepartures: "成都直飞",
-					tourType: "出境跟团游",
-
-				}, {
-					src: '/static/edit/pic.svg',
-					title: '【春节旅游】斯里兰卡全景6-9天跟团游·狮子岩/康提/南部海域等10个...',
-					institute: '世界风情假期',
-					price: '2500',
-					comments: 23,
-					sold: 12,
-					productDepartures: "成都直飞",
-					tourType: "出境跟团游",
-
-				}],
+				list: [],
 				pageNum:1,
-				totalPage:1,
-				pageSize:10
+				totalPage:2,
+				pageSize:10,
+				type_id:1
 			}
 		},
 		methods: {
 			chooseType() {
 
 			},
-			toDetails() {
+			toDetails(id) {
 				uni.navigateTo({
-					url: '/pages/shop/shop'
+					url: '/pages/shop/shop?id='+id
 				})
 			},
 			touchBottom(){
@@ -144,15 +106,24 @@
 			getShopList(){
 				let page = {
 					page:this.pageNum,
-					perPage:this.pageSize
+					perPage:this.pageSize,
+					type_id:this.type_id
 				}
 				getShopList(page).then(res=>{
+					this.list  = res.list.data
+				})
+			},
+			getNavList(){
+				getNav().then(res=>{
 					console.log(res)
+					// this.baseList = res
 				})
 			}
 		},
 		mounted() {
 			uni.hideTabBar()
+			this.getShopList()
+			this.getNavList()
 		}
 	}
 </script>
@@ -212,7 +183,7 @@
 
 				&-price {
 					color: #EC1C00;
-					font-size: 20rpx;
+					font-size: 25rpx;
 					font-weight: 600;
 				}
 

@@ -37,12 +37,17 @@
 		},
 		methods:{
 			getGuideDetail(id){
+			
 				guideDetail(id).then(res=>{
-					console.log(res)
+					this.title = res.data.name
+					this.author = res.data.author
+					this.time = res.data.fabu_at
+					this.content=res.data.content
 				})
 			}
 		},
 		onLoad(option) {
+		
 			this.getGuideDetail(option.id)
 		}
 	}

@@ -5,9 +5,9 @@ import uView from "uview-ui";
 Vue.use(uView);
 
 if (process.env.NODE_ENV === 'development') {
-	config.baseURL = "/api"
+	config.baseURL = "http://111.229.146.166/api"
 } else {
-	config.baseURL = ""
+	config.baseURL = "http://8.134.210.121/api"
 }
 
 // #ifndef VUE3

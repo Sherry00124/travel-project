@@ -95,6 +95,7 @@
 			<button class="order-tabbar-button" @click="show=true">联系客服下单</button>
 		</view>
 		<qrCode :show="show" @close="close"/>
+		
 	</view>
 </template>
 

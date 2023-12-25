@@ -3,15 +3,15 @@
 		<view class="container"></view>
 		<view class="guide">
 			<scroll-view scroll-y="true" class="scroll-view" @scrolltolower="touchBottom">
-				<u-grid :border="false" @click="choose" col="2">
+				<u-grid :border="false"  col="2">
 					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
-						<view class="guide-item">
-							<img :src="baseListItem.name" alt="" width="100%">
+						<view class="guide-item" @click="choose(baseListItem.id)">
+							<img :src="baseListItem.face" alt="" width="100%">
 							<!-- <u-icon :customStyle="{marginBottom:5+'rpx'}" :name="baseListItem.name" :size="120"></u-icon> -->
-							<text class="guide-item-content">{{baseListItem.title}}</text>
+							<text class="guide-item-content">{{baseListItem.name}}</text>
 							<view class="guide-item-bottom flex-row">
-								<img :src="baseListItem.name" alt="" width="16rpx" class="guide-item-bottom-avater">
-								<text class="guide-item-bottom-name">万达利</text>
+								<img :src="baseListItem.face" alt="" width="16rpx" class="guide-item-bottom-avater">
+								<text class="guide-item-bottom-name">{{baseListItem.author}}</text>
 							</view>
 						</view>
 					</u-grid-item>
@@ -20,6 +20,7 @@
 		</view>
 		<firstAid />
 		<tabbar :currentTab='1' />
+		<ICP/>
 	</view>
 </template>
 
@@ -28,30 +29,31 @@
 	export default {
 		data() {
 			return {
-				baseList: [{
-						name: '/static/edit/pic.svg',
-						title: '巴厘岛 | 总有一个假日要属于bali'
-					},
-					{
-						name: '/static/edit/pic.svg',
-						title: '成都在做，幸福在右，人间烟火，理想生活...'
-					},
-					{
-						name: '/static/edit/pic.svg',
-						title: '湾区超美风景线,一起感受至美南沙'
-					},
-					{
-						name: '/static/edit/pic.svg',
-						title: '雨季的大理，没有风花雪月，却依旧惊艳...'
-					},
-					{
-						name: '/static/edit/pic.svg',
-						title: '巴厘岛 | 总有一个假日要属于bali'
-					},
-					{
-						name: '/static/edit/pic.svg',
-						title: '巴厘岛 | 总有一个假日要属于bali'
-					},
+				baseList: [
+					// {
+					// 	name: '/static/edit/pic.svg',
+					// 	title: '巴厘岛 | 总有一个假日要属于bali'
+					// },
+					// {
+					// 	name: '/static/edit/pic.svg',
+					// 	title: '成都在做，幸福在右，人间烟火，理想生活...'
+					// },
+					// {
+					// 	name: '/static/edit/pic.svg',
+					// 	title: '湾区超美风景线,一起感受至美南沙'
+					// },
+					// {
+					// 	name: '/static/edit/pic.svg',
+					// 	title: '雨季的大理，没有风花雪月，却依旧惊艳...'
+					// },
+					// {
+					// 	name: '/static/edit/pic.svg',
+					// 	title: '巴厘岛 | 总有一个假日要属于bali'
+					// },
+					// {
+					// 	name: '/static/edit/pic.svg',
+					// 	title: '巴厘岛 | 总有一个假日要属于bali'
+					// },
 				],
 				pageNum:1,
 				totalPage:1,
@@ -59,10 +61,13 @@
 			}
 		},
 		methods: {
-			choose() {
+			choose(id) {
 				uni.navigateTo({
-					url: '/pages/guide/guide'
+					url: '/pages/guide/guide?id='+id
 				})
+			},
+			onShow(){
+			  this.getGuide();	
 			},
 			touchBottom(){
 				if (this.pageNum >= this.totalPage) {
@@ -71,6 +76,7 @@
 						icon:'none'
 					})
 				} else {
+					this.pageNum++;
 					this.getGuide()
 				}
 			},
@@ -80,7 +86,8 @@
 					perPage:this.pageSize
 				}
 				getGuideList(page).then(res=>{
-					console.log(res)
+					this.totalPage = res.list.last_page
+					this.baseList=res.list.data
 				})
 			}
 		},
