@@ -62,7 +62,8 @@
 				pageNum: 1,
 				totalPage: 2,
 				pageSize: 10,
-				type_id: 1
+				type_id: 1,
+				
 			}
 		},
 		watch: {

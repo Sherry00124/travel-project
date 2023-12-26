@@ -7,7 +7,7 @@
 		{
 			"path": "pages/index/shop",
 			"style": {
-				"navigationBarTitleText": "商城",
+				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 

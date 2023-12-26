@@ -3,14 +3,17 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>
+		<title id="dynamicTitle">
 			<%= htmlWebpackPlugin.options.title %>
 		</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
 		<!-- Open Graph data -->
 		<!-- <meta property="og:title" content="Title Here" /> -->
 		<!-- <meta property="og:url" content="http://www.example.com/" /> -->
 		<!-- <meta property="og:image" content="http://example.com/image.jpg" /> -->
 		<!-- <meta property="og:description" content="Description Here" /> -->
+		<!-- <meta property="og:keyword" content="Description Here" /> -->
 		<script>
 			var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
 			document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
@@ -23,5 +26,40 @@
 		</noscript>
 		<div id="app"></div>
 		<!-- built files will be auto injected -->
+		 <script>
+		    // 使用原生 JavaScript 进行异步数据获取
+		    async function fetchData() {
+		      try {
+		        // 发起 HTTP GET 请求获取数据
+		        const response = await fetch('http://8.134.210.121/api/user/systemConfig');
+		        const res = await response.json();
+				const data = res.data[0]
+		        // 更新页面标题
+		        document.getElementById('dynamicTitle').innerText = data.title;
+		        // 创建或更新关键字 meta
+		        let keywordsMeta = document.querySelector('meta[name="keywords"]');
+		        if (!keywordsMeta) {
+		          keywordsMeta = document.createElement('meta');
+		          keywordsMeta.name = 'keywords';
+		          document.head.appendChild(keywordsMeta);
+		        }
+		        keywordsMeta.content = data.keywords;
+		        // 创建或更新描述 meta
+		        let descriptionMeta = document.querySelector('meta[name="description"]');
+				
+		        if (!descriptionMeta) {
+		          descriptionMeta = document.createElement('meta');
+		          descriptionMeta.name = 'description';
+		          document.head.appendChild(descriptionMeta);
+		        }
+		        descriptionMeta.content = data.description;
+		      } catch (error) {
+		        console.error('Error fetching data:', error);
+		      }
+		    }
+		
+		    // 在页面加载完成后调用 fetchData
+		    window.onload = fetchData;
+		  </script>
 	</body>
 </html>

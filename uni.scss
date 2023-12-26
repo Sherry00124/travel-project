@@ -25,10 +25,10 @@
 	position: absolute;
 }
 .navbar-bg{
-	// background-image: url('/static/shop/bg.svg');
-	// background-repeat: no-repeat;
-	// background-size: cover;
-	background: linear-gradient(to right, #FCE2CB, #FED772);
+	background-image: url('/static/shop/bg.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	// background: linear-gradient(to right, #FCE2CB, #FED772);
 	z-index: 999;
 	width: 750rpx;
 	height: 44px;
