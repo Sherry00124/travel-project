@@ -55,7 +55,9 @@
 			</view>
 			<view class="shop-content">
 				<view class="">产品详情</view>
-				<u-parse :content="content"></u-parse>
+				<view class="shop-content-body">
+					<u-parse :content="content"></u-parse>
+				</view>
 			</view>
 		</view>
 		<view class="shop-tabbar flex-row">
@@ -140,7 +142,7 @@
 		&-body {
 			margin-top: 100rpx;
 			// width: 90%;
-
+			
 		}
 
 		&-details {
@@ -186,6 +188,9 @@
 			padding: 40rpx;
 			width: 750rpx;
 			margin-left: -40rpx;
+			&-body{
+				width: 100%;
+			}
 		}
 
 		&-date {
