@@ -107,6 +107,7 @@
 			</view>
 		</view>
 		<qrCode :show="show" @close="close"/>
+		
 	</view>
 	
 </template>

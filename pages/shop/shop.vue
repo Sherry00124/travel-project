@@ -12,12 +12,13 @@
 				<view class="shop-details-price flex-row">
 					<text>￥</text>
 					<text>{{minPrice}}</text>
-					<text>-</text>
-					<text>{{maxPrice}}</text>
+					<!-- <text>-</text> -->
+					<!-- <text>{{maxPrice}}</text> -->
 				</view>
 				<text class="shop-details-title">{{title}}</text>
 				<view class="flex-row">
-					<view class="shop-details-tags" v-for="(item,index) in tags">{{item}}</view>
+					<!-- <view class="shop-details-tags" v-for="(item,index) in tags">{{item}}</view> -->
+					<view class="shop-details-tags">{{tags}}</view>
 				</view>
 			</view>
 			<view class="shop-date flex-column">
@@ -39,7 +40,7 @@
 							<view class="flex-row">
 								<text style="
 							color: #FF4747;
-							font-size: 28rpx;">￥{{item.price}}</text>
+							font-size: 28rpx;">￥{{minPrice}}</text>
 								<text style="color:#8E8E93;
 						font-size: 28rpx;">起</text>
 							</view>
@@ -67,19 +68,17 @@
 			</view>
 			<button class="shop-tabbar-button" @click="buyNow">立即预约</button>
 		</view>
+		
 	</view>
 </template>
 
 <script>
+	import {shopDetail} from '@/api/shop.js'
 	export default {
 		data() {
 			return {
-				title: '[春节区期] 斯里兰卡全景6到0天跟团荡·拥子老/康提/南部海流/尼甘布(胎的江树林·海上火车+佛牙奇+加勒古堡+米内日亚公因)',
-				list: [
-					'/static/details/display.png',
-					'/static/details/display.png',
-					'/static/details/display.png',
-				],
+				title: '',
+				list: [],
 				minPrice: 4500,
 				maxPrice: 17600,
 				tags: ["行程可调", "性价比出众"],
@@ -108,7 +107,7 @@
 						price: 4500
 					}
 				],
-				content: "<div>1、私家小团，升级服务，1单1团，专车专导，微信管家服务。2、鼓浪屿特别体验1晚地标住宿，更多时间留给您，留给鼓浪屿，Feeling倍儿爽3、行程涵盖福建全线精华景点，一次出游，不留任何遗憾，无购物无自费4、走法设计舒适合理，符合人体运动技能，深度畅玩福建，拒绝常规旅游弊病“走马观花旅游模式</div>"
+				content: ""
 			}
 		},
 		methods: {
@@ -119,17 +118,22 @@
 			},
 			toCalendar(){
 				uni.navigateTo({
-					url: '/pages/date/date'
+					url: '/pages/date/date?price='+this.minPrice+'&title='+this.title
 				})
 			},
 			getShopDetail(id){
 				shopDetail(id).then(res=>{
-					console.log(res)
+					this.list = res.data.images
+					this.title = res.data.name
+					this.content = res.data.content
+					this.minPrice = res.data.product_price
+					this.tags = res.data.intro
 				})
 			}
 		},
 		onLoad(option) {
 			this.getShopDetail(option.id)
+			
 		}
 	}
 </script>
@@ -189,6 +193,10 @@
 			width: 750rpx;
 			margin-left: -40rpx;
 			&-body{
+<<<<<<< HEAD
+=======
+				font-weight: 500;
+>>>>>>> 8de3a0dedf2420e45a5838381524e0149ae3f7a8
 				width: 100%;
 			}
 		}

@@ -16,7 +16,7 @@ export function register(data) {
 export function login(data) {
 	return new Promise((resolve, reject) => {
 		request({
-			url: `/login`,
+			url: `/auth/login`,
 			method: 'POST',
 			data:JSON.stringify(data),
 			loading:true,

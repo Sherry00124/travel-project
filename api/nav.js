@@ -5,17 +5,17 @@ export function getNavList(data) {
 		request({
 			url: `/user/navList`,
 		}).then(res=>{
-			resolve(res.data)
+			resolve(res.data.data)
 		})
 	});
 }
 
-// export function getNavList(data) {
-// 	return new Promise((resolve, reject) => {
-// 		request({
-// 			url: `/user/navList`,
-// 		}).then(res=>{
-// 			resolve(res.data)
-// 		})
-// 	});
-// }
+export function getNav(data) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: `/user/shopType`,
+		}).then(res=>{
+			resolve(res.data)
+		})
+	});
+}

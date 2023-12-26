@@ -33,6 +33,7 @@
 		</view>
 		<firstAid />
 		<tabbar :currentTab='2' />
+		<ICP/>
 	</view>
 </template>
 

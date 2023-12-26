@@ -22,7 +22,7 @@
 				'uni-calendar-item--after-checked':weeks.afterMultiple,
 				'uni-calendar-item--disable':weeks.disable,
 				}">{{weeks.date}}</text>
-				<text class="uni-calendar-item-price" v-if="!weeks.disable">￥2000</text>
+				<text class="uni-calendar-item-price" v-if="!weeks.disable">￥{{price}}</text>
 			<!-- <text v-if="!lunar&&!weeks.extraInfo && weeks.isDay" class="uni-calendar-item__weeks-lunar-text" :class="{
 				'uni-calendar-item--isDay-text':weeks.isDay,
 				'uni-calendar-item--isDay':calendar.fullDate === weeks.fullDate && weeks.isDay,
@@ -87,6 +87,9 @@
 			lunar: {
 				type: Boolean,
 				default: false
+			},
+			price:{
+				type:String,
 			}
 		},
 		computed: {

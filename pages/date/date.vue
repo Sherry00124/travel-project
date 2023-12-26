@@ -11,14 +11,14 @@
 						<text class="date-top-tabs-item-month">{{item.month}}月</text>
 						<view class="date-top-tabs-item-price flex-row">
 							<text>￥</text>
-							<text>{{item.price}}</text>
+							<text>{{price}}</text>
 							<text>起</text>
 						</view>
 						<view class="line-y" v-show="item.ifChoose"></view>
 					</view>
 				</view>
 				<view style="width: 750rpx;margin-left: -40rpx;margin-top: 16rpx;">
-					<uni-calendar :insert="true" :lunar="false" @change="change" ref="calender" />
+					<uni-calendar :insert="true" :lunar="false" @change="change" ref="calender" :price="price" />
 				</view>
 			</view>
 			<view class="date-packages">
@@ -36,7 +36,7 @@
 				<view class="flex-between" style="margin-top: 16rpx;font-size: 28rpx;">
 					<view class="flex-row">
 						<text>成人</text>
-						<text style="color: #FF4747;">￥{{price.adultPrice}}</text>
+						<text style="color: #FF4747;">￥{{price}}</text>
 					</view>
 					<u-number-box v-model="adultNum" min="0">
 						<view slot="minus" class="minus">
@@ -51,7 +51,7 @@
 				<view class="flex-between" style="margin-top: 16rpx;">
 					<view class="flex-row">
 						<text>儿童</text>
-						<text style="color: #FF4747;">￥{{price.childPrice}}</text>
+						<text style="color: #FF4747;">￥{{price}}</text>
 					</view>
 					<u-number-box v-model="childNum" min="0">
 						<view slot="minus" class="minus">
@@ -71,7 +71,7 @@
 				<view class="flex-row" style="margin-top: 12rpx;">
 					<text>总计</text>
 					<text
-						style="color: #FF4747;margin-right: 10rpx;">￥{{price.childPrice*childNum+price.adultPrice*adultNum}}</text>
+						style="color: #FF4747;margin-right: 10rpx;">￥{{price*childNum+price*adultNum}}</text>
 				</view>
 			</view>
 			<button class="date-tabbar-button" @click="buyNow">立即购买</button>
@@ -83,7 +83,7 @@
 	export default {
 		data() {
 			return {
-				title: '[春节区期] 斯里兰卡全景6到0天跟团荡·拥子老/康提/南部海流/尼甘布(胎的江树林·海上火车+佛牙奇+加勒古堡+米内日亚公因)',
+				title: '',
 				info: {
 					lunar: true,
 					range: true,
@@ -154,7 +154,8 @@
 					}
 				],
 				value: 1,
-				chooseDate:''
+				chooseDate:'',
+				price:0
 			};
 		},
 		mounted(){
@@ -163,6 +164,10 @@
 			var month = today.getMonth() + 1; 
 			var day = today.getDate();
 			this.chooseDate=year+'-'+month+'-'+day
+		},
+		onLoad(option) {
+			this.price  =option.price
+			this.title = option.title
 		},
 		methods: {
 			change(params) {

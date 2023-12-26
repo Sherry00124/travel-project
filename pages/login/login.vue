@@ -34,6 +34,7 @@
 				</view>
 			</view>
 		</view>
+		<ICP/>
 	</view>
 </template>
 

@@ -14,19 +14,19 @@ export default function request(options) {
 			sslVerify:  false,
 			success: (res) => {
 				uni.hideLoading()
-				// if (res.statusCode == '401') {
-				// 	uni.showToast({
-				// 		title: res.data.message,
-				// 		icon: 'none',
-				// 		duration:2000,
-				// 		complete: () => {
-				// 			uni.redirectTo({
-				// 				url:"/pages/login/login"
-				// 			})
-				// 		}
-				// 	});
-				// }
-				resolve(res)
+				if (res.statusCode != '200') {
+					uni.showToast({
+						title: res.data.error,
+						icon: 'none',
+					});
+					
+				}else if(res.statusCode == '401'){
+					uni.navigateTo({
+						url:'/pages/login/login'
+					})
+				} else{
+					resolve(res)
+				}
 			},
 			fail: (err) => {
 				uni.hideLoading()
