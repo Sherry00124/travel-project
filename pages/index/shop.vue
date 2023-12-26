@@ -3,10 +3,11 @@
 		<view class="container"></view>
 		<view class="shop flex-column">
 			<view class="shop-top">
-				<u-grid :border="false" @click="chooseType" col="5">
-					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
-						<u-icon :customStyle="{marginBottom:5+'rpx'}" :name="baseListItem.name" :size="25"></u-icon>
-						<text class="grid-text">{{baseListItem.title}}</text>
+				<u-grid :border="false" col="5">
+					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex"
+						@click="chooseType(baseListItem)">
+						<u-icon :customStyle="{marginBottom:5+'rpx'}" :name="baseListItem.icon" :size="25"></u-icon>
+						<text class="grid-text">{{baseListItem.name}}</text>
 					</u-grid-item>
 				</u-grid>
 			</view>
@@ -14,109 +15,94 @@
 				<scroll-view scroll-y="true" class="scroll-view" @scrolltolower="touchBottom">
 					<view class="flex-row shop-body-item" v-for="(item,index) in list" @click="toDetails(item.id)">
 						<view class="shop-body-img">
-							<img :src="item.images" alt="" class="shop-body-item-img">
+							<img :src="item.images[0]" alt="" class="shop-body-item-img">
 							<view class="shop-body-departures">
-								成都直飞
+								{{item.diqu_tags}}
 							</view>
-							<view class="shop-body-tourType">出境跟团游</view>
+							<view class="shop-body-tourType">{{item.type_tags}}</view>
 						</view>
 						<view class="flex-column">
 							<text class="shop-body-item-title">{{item.name}}</text>
 							<text class="shop-body-item-price">￥{{item.product_price}}起</text>
-							<view class="flex-between shop-body-item-bottom">
-								<view class="flex-row">
-									<u-icon name="/static/shop/shop.svg" :size="16"></u-icon>
-									<text class="shop-body-item-ins">世界风情假期</text>
-								</view>
-								<view class="flex-row" style="font-size: 24rpx;margin-left: 50rpx;">
-									<!-- <text class="shop-body-item-n'um">{{item.scores}}</text> -->
-									<text style="margin-right: 5rpx;">评分</text>
-									<text class="shop-body-item-num">{{item.scores}}</text>
-									<!-- <text>已售</text> -->
+							<view class="shop-body-item-bottom">
+								<view class="flex-between" style="width: 400rpx;">
+									<view class="flex-row">
+										<u-icon name="/static/shop/shop.svg" :size="18"></u-icon>
+										<text class="shop-body-item-ins">{{item.title}}</text>
+									</view>
+									<view class="flex-row" style="font-size: 28rpx;">
+										<text style="margin-right: 5rpx;">评分</text>
+										<text class="shop-body-item-num">{{item.scores}}</text>
+									</view>
 								</view>
 							</view>
-
 						</view>
-
 					</view>
 				</scroll-view>
 			</view>
 		</view>
 		<firstAid />
 		<tabbar :currentTab='0' />
-		<ICP/>
+		<ICP />
 	</view>
 </template>
 
 <script>
-	import {getShopList} from '@/api/shop.js'
-	import {getNav}from '@/api/nav.js'
+	import {
+		getShopList
+	} from '@/api/shop.js'
+	import {
+		getNav
+	} from '@/api/nav.js'
 	export default {
 		data() {
 			return {
-				baseList: [{
-						name: '/static/shop/ticket.svg',
-						title: '门票'
-
-					},
-					{
-						name: '/static/shop/current.svg',
-						title: '当前游'
-					},
-					{
-						name: '/static/shop/hotel.svg',
-						title: '旅店'
-					},
-					{
-						name: '/static/shop/customs.svg',
-						title: '跟团游'
-					},
-					{
-						name: '/static/shop/free.svg',
-						title: '自由行'
-
-					},
-				],
+				baseList: [],
 				list: [],
-				pageNum:1,
-				totalPage:2,
-				pageSize:10,
-				type_id:1
+				pageNum: 1,
+				totalPage: 2,
+				pageSize: 10,
+				type_id: 1
+			}
+		},
+		watch: {
+			type_id(newValue, oldValue) {
+				this.getShopList()
 			}
 		},
 		methods: {
-			chooseType() {
-
+			chooseType(params) {
+				this.type_id = params.id
 			},
 			toDetails(id) {
 				uni.navigateTo({
-					url: '/pages/shop/shop?id='+id
+					url: '/pages/shop/shop?id=' + id
 				})
 			},
-			touchBottom(){
+			touchBottom() {
 				if (this.pageNum >= this.totalPage) {
 					uni.showToast({
-						title:"没有更多",
-						icon:'none'
+						title: "没有更多",
+						icon: 'none'
 					})
 				} else {
 					this.getShopList()
 				}
 			},
-			getShopList(){
+			getShopList() {
 				let page = {
-					page:this.pageNum,
-					perPage:this.pageSize,
-					type_id:this.type_id
+					page: this.pageNum,
+					perPage: this.pageSize,
+					type_id: this.type_id
 				}
-				getShopList(page).then(res=>{
-					this.list  = res.list.data
+				getShopList(page).then(res => {
+					this.list = res.list.data
 				})
 			},
-			getNavList(){
-				getNav().then(res=>{
-					console.log(res)
-					// this.baseList = res
+			getNavList() {
+				getNav().then(res => {
+					this.baseList = res.data
+					console.log(this.baseList)
 				})
 			}
 		},
@@ -124,6 +110,13 @@
 			uni.hideTabBar()
 			this.getShopList()
 			this.getNavList()
+			// uni.setNavigationBarTitle({
+			// 	title: '首页',
+			// 	success: () => {
+			// 		console.log('修改标题成功')
+			// 	},
+
+			// })
 		}
 	}
 </script>
@@ -145,12 +138,14 @@
 		&-body {
 			margin-top: 28rpx;
 			width: 100%;
+
 			&-img {
 				position: relative;
 				border-radius: 16rpx 16rpx 16rpx 16rpx;
-				
+
 				margin-right: 20rpx;
 			}
+
 			&-departures {
 				position: absolute;
 				top: 0;
@@ -160,6 +155,12 @@
 				color: #fff;
 				font-size: 22rpx;
 				padding: 8rpx;
+				width: 100rpx;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 1;
 			}
 
 			&-tourType {
@@ -172,6 +173,11 @@
 				font-size: 22rpx;
 				padding: 8rpx 0;
 				text-align: center;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 1;
 			}
 
 			&-item {
@@ -183,7 +189,7 @@
 
 				&-price {
 					color: #EC1C00;
-					font-size: 25rpx;
+					font-size: 30rpx;
 					font-weight: 600;
 				}
 
@@ -195,11 +201,11 @@
 
 				&-ins {
 					color: #8E8E93;
-					font-size: 24rpx;
+					font-size: 28rpx;
 				}
 
 				&-title {
-					font-size: 26rpx;
+					font-size: 30rpx;
 					color: #212936;
 					font-weight: bold;
 					display: -webkit-box;
@@ -212,11 +218,12 @@
 				}
 
 				&-num {
-					font-size: 24rpx;
+					font-size: 28rpx;
 					color: #FACC15;
 				}
 
 				&-bottom {
+					width: 100%;
 					margin-top: 16rpx;
 				}
 			}

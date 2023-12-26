@@ -6,11 +6,11 @@
 				<u-grid :border="false"  col="2">
 					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
 						<view class="guide-item" @click="choose(baseListItem.id)">
-							<img :src="baseListItem.face" alt="" width="100%">
+							<img :src="baseListItem.face" alt="" width="100%" >
 							<!-- <u-icon :customStyle="{marginBottom:5+'rpx'}" :name="baseListItem.name" :size="120"></u-icon> -->
 							<text class="guide-item-content">{{baseListItem.name}}</text>
 							<view class="guide-item-bottom flex-row">
-								<img :src="baseListItem.face" alt="" width="16rpx" class="guide-item-bottom-avater">
+								<img :src="baseListItem.face" alt="" width="16rpx" height="16rpx" class="guide-item-bottom-avater">
 								<text class="guide-item-bottom-name">{{baseListItem.author}}</text>
 							</view>
 						</view>
@@ -29,32 +29,7 @@
 	export default {
 		data() {
 			return {
-				baseList: [
-					// {
-					// 	name: '/static/edit/pic.svg',
-					// 	title: '巴厘岛 | 总有一个假日要属于bali'
-					// },
-					// {
-					// 	name: '/static/edit/pic.svg',
-					// 	title: '成都在做，幸福在右，人间烟火，理想生活...'
-					// },
-					// {
-					// 	name: '/static/edit/pic.svg',
-					// 	title: '湾区超美风景线,一起感受至美南沙'
-					// },
-					// {
-					// 	name: '/static/edit/pic.svg',
-					// 	title: '雨季的大理，没有风花雪月，却依旧惊艳...'
-					// },
-					// {
-					// 	name: '/static/edit/pic.svg',
-					// 	title: '巴厘岛 | 总有一个假日要属于bali'
-					// },
-					// {
-					// 	name: '/static/edit/pic.svg',
-					// 	title: '巴厘岛 | 总有一个假日要属于bali'
-					// },
-				],
+				baseList: [],
 				pageNum:1,
 				totalPage:1,
 				pageSize:6
@@ -101,7 +76,6 @@
 	.guide {
 		padding: 40rpx;
 		background-color: #F8F8F8;
-		margin-bottom: 100rpx;
 		&-item {
 			background-color: #fff;
 			width: 270rpx;
@@ -120,7 +94,6 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 				-webkit-line-clamp: 2;
-				/* 限制显示的行数 */
 				margin: 16rpx 0;
 
 			}
@@ -132,6 +105,7 @@
 
 				&-avater {
 					border-radius: 50%;
+					margin-right: 10rpx;
 				}
 			}
 		}
@@ -140,5 +114,6 @@
 	.scroll-view {
 		width: 100%;
 		height: 90vh;
+		margin-bottom: 100rpx;
 	}
 </style>

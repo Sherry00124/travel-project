@@ -1,12 +1,14 @@
 <template>
 	<view>
 		<view class="container"></view>
-		<view class="guide">
-			<u-navbar title="攻略" :autoBack="true" bgColor="transparent">
+		<view class="navbar-bg" >
+			<u-navbar title="攻略" :autoBack="true" bgColor="transparent" @leftClick="leftClick">
 			</u-navbar>
+		</view>
+		<view class="guide">
 			<view class="guide-body flex-column">
 				<text class="guide-body-title">{{title}}</text>
-				<view class="flex-between" style="margin: 30rpx 0;">
+				<view class="flex-between guide-body-subtitle" style="margin: 30rpx 0;">
 					<view class="flex-row" style="align-items: center;">
 						<view class="guide-body-avatar">
 							<u-avatar text="北" fontSize="15" size="30" randomBgColor></u-avatar>
@@ -29,20 +31,24 @@
 	export default {
 		data() {
 			return {
-				title: "成都在做，幸福在右，人间烟火，理想生活 | 2020成都最新版游记",
-				author: 'Kreloan',
-				time: '2021-11-21',
-				content: "<div>1、私家小团，升级服务，1单1团，专车专导，微信管家服务。2、鼓浪屿特别体验1晚地标住宿，更多时间留给您，留给鼓浪屿，Feeling倍儿爽3、行程涵盖福建全线精华景点，一次出游，不留任何遗憾，无购物无自费4、走法设计舒适合理，符合人体运动技能，深度畅玩福建，拒绝常规旅游弊病“走马观花旅游模式</div>"
+				title: "",
+				author: '',
+				time: '',
+				content: ""
 			};
 		},
 		methods:{
 			getGuideDetail(id){
-			
 				guideDetail(id).then(res=>{
 					this.title = res.data.name
 					this.author = res.data.author
 					this.time = res.data.fabu_at
 					this.content=res.data.content
+				})
+			},
+			leftClick(){
+				uni.switchTab({
+					url:'/pages/index/guide'
 				})
 			}
 		},
@@ -55,21 +61,20 @@
 
 <style lang="scss">
 	.guide {
-
 		background-color: #F8F8F8;
-		
 		&-body {
 			position: relative;
 			z-index: 2;
 			margin:0 40rpx;
-			margin-top: 100rpx;
-
 			&-title {
 				font-weight: bold;
 				color: #1C1C1E;
 				font-size: 36rpx;
+				margin-top: 90rpx;
 			}
-
+			&-subtitle{
+				align-items: center;
+			}
 			&-avatar {
 				margin-right: 10rpx;
 			}

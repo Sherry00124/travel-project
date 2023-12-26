@@ -18,7 +18,7 @@
 					</view>
 				</view>
 				<view style="width: 750rpx;margin-left: -40rpx;margin-top: 16rpx;">
-					<uni-calendar :insert="true" :lunar="false" @change="change" ref="calender" :price="price" />
+					<uni-calendar :insert="true" :lunar="false" @change="change" ref="calender" :price="price" :date="chooseDate"/>
 				</view>
 			</view>
 			<view class="date-packages">
@@ -48,14 +48,14 @@
 						</view>
 					</u-number-box>
 				</view>
-				<view class="flex-between" style="margin-top: 16rpx;">
+				<view class="flex-between" style="margin-top: 16rpx;font-size: 28rpx;">
 					<view class="flex-row">
 						<text>儿童</text>
 						<text style="color: #FF4747;">￥{{price}}</text>
 					</view>
 					<u-number-box v-model="childNum" min="0">
 						<view slot="minus" class="minus">
-							<u-icon name="minus-circle" size="25" :color="childNum>1?'#FACC15':'#E9EBED'"></u-icon>
+							<u-icon name="minus-circle" size="25" :color="childNum>0?'#FACC15':'#E9EBED'"></u-icon>
 						</view>
 						<text slot="input" style="width: 50rpx;text-align: center;" class="input">{{childNum}}</text>
 						<view slot="plus" class="plus">
@@ -155,19 +155,27 @@
 				],
 				value: 1,
 				chooseDate:'',
-				price:0
+				price:0,
+				dayInfo:[]
 			};
 		},
 		mounted(){
-			var today = new Date();
-			var year = today.getFullYear();
-			var month = today.getMonth() + 1; 
-			var day = today.getDate();
-			this.chooseDate=year+'-'+month+'-'+day
+			
 		},
 		onLoad(option) {
 			this.price  =option.price
 			this.title = option.title
+			this.dayInfo = JSON.parse(option.dayInfo)
+			if(this.dayInfo){
+				this.chooseDate = this.dayInfo.year+'-'+this.dayInfo.date
+			}else{
+				var today = new Date();
+				var year = today.getFullYear();
+				var month = today.getMonth() + 1; 
+				var day = today.getDate();
+				this.chooseDate=year+'-'+month+'-'+day
+			}
+			
 		},
 		methods: {
 			change(params) {

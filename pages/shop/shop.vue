@@ -2,8 +2,10 @@
 	<view class=" ">
 		<view class="container"></view>
 		<view class="shop flex-column">
-			<u-navbar :title="title" :autoBack="true" bgColor="transparent">
-			</u-navbar>
+			<view class="navbar-bg" >
+				<u-navbar :title="title" :autoBack="true" @leftClick="leftClick" bgColor="transparent">
+				</u-navbar>
+			</view>
 			<view class="shop-body">
 				<u-swiper :list="list" height="300" :autoplay="true" :indicator="true" indicatorMode="dot">
 				</u-swiper>
@@ -17,8 +19,8 @@
 				</view>
 				<text class="shop-details-title">{{title}}</text>
 				<view class="flex-row">
-					<!-- <view class="shop-details-tags" v-for="(item,index) in tags">{{item}}</view> -->
-					<view class="shop-details-tags">{{tags}}</view>
+					<view class="shop-details-tags" v-for="(item,index) in tags">{{item}}</view>
+					<!-- <view class="shop-details-tags">{{tags}}</view> -->
 				</view>
 			</view>
 			<view class="shop-date flex-column">
@@ -27,14 +29,13 @@
 						<view class="" style="margin-right: 5rpx;">
 							<u-icon name="/static/shop/location.svg" size="23"></u-icon>
 						</view>
-
-						<text>成都出发</text>
+						<text>{{info.diqu_tags}}</text>
 					</view>
 					<text style="font-weight: 500;" @click="toCalendar">更改出发地></text>
 				</view>
 				<view class="flex-between">
 					<view class="shop-date-left flex-row">
-						<view class="flex-column shop-date-item" v-for="(item,index) in dates">
+						<view class="flex-column shop-date-item" v-for="(item,index) in dates" @click="chooseDate(item)">
 							<text>{{item.week}}</text>
 							<text>{{item.date}}</text>
 							<view class="flex-row">
@@ -51,8 +52,6 @@
 						<text>更多日期</text>
 					</view>
 				</view>
-
-
 			</view>
 			<view class="shop-content">
 				<view class="">产品详情</view>
@@ -63,12 +62,12 @@
 		</view>
 		<view class="shop-tabbar flex-row">
 			<view class="shop-tabbar-icon flex-between">
-				<u-icon name="/static/details/firstAid.svg" size="30"></u-icon>
+				<u-icon name="/static/details/firstAid.svg" size="30" @click="show=true"></u-icon>
 				<u-icon name="/static/details/share.svg" size="30"></u-icon>
 			</view>
 			<button class="shop-tabbar-button" @click="buyNow">立即预约</button>
 		</view>
-		
+		<qrCode :show="show" @close="close"/>
 	</view>
 </template>
 
@@ -81,39 +80,26 @@
 				list: [],
 				minPrice: 4500,
 				maxPrice: 17600,
-				tags: ["行程可调", "性价比出众"],
-				dates: [{
-						week: "周一",
-						date: "12-21",
-						price: 4500
-					},
-					{
-						week: "周一",
-						date: "12-21",
-						price: 4500
-					},
-					{
-						week: "周一",
-						date: "12-21",
-						price: 4500
-					}, {
-						week: "周一",
-						date: "12-21",
-						price: 4500
-					},
-					{
-						week: "周一",
-						date: "12-21",
-						price: 4500
-					}
-				],
-				content: ""
+				tags: [],
+				content: "",
+				info:{},
+				show:false,
+				bgColor: 'linear-gradient(to right, #FCE2CB, #FED772)'
 			}
 		},
 		methods: {
 			buyNow() {
-				uni.navigateTo({
-					url: '/pages/date/date'
+				// uni.navigateTo({
+				// 	url: '/pages/date/date'
+				// })
+				this.show = true
+			},
+			close(){
+				this.show = false
+			},
+			leftClick(){
+				uni.switchTab({
+					url:'/pages/index/shop'
 				})
 			},
 			toCalendar(){
@@ -127,13 +113,55 @@
 					this.title = res.data.name
 					this.content = res.data.content
 					this.minPrice = res.data.product_price
-					this.tags = res.data.intro
+					this.tags = res.data.intro.split('\n');
+					this.info = res.data
 				})
+			},
+			generateWeekDates() {
+			  const today = new Date();
+			  const weekDates = [];
+			
+			  // 生成当前日期及其后一周的日期
+			  for (let i = 0; i < 7; i++) {
+			    const date = new Date(today);
+			    date.setDate(today.getDate() + i);
+			
+			    const weekDay = this.getWeekday(date.getDay());
+			    const formattedDate = this.formatDate(date);
+			
+			    const dayInfo = {
+			      week: weekDay,
+			      date: formattedDate,
+			      price: this.minPrice,
+				  year: date.getFullYear(),
+			    };
+			    weekDates.push(dayInfo);
+			  }
+			
+			  return weekDates;
+			},
+			getWeekday(dayNumber) {
+			  const weekdays = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+			  return weekdays[dayNumber];
+			},
+			formatDate(date) {
+			  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+			  const day = date.getDate().toString().padStart(2, '0');
+			  return `${month}-${day}`;
+			},
+			chooseDate(params){
+				uni.navigateTo({
+					url:'/pages/date/date?price='+this.minPrice+'&title='+this.title+'&dayInfo='+JSON.stringify(params)
+				})
+			}
+		},
+		computed:{
+			dates(){
+				return this.generateWeekDates()
 			}
 		},
 		onLoad(option) {
 			this.getShopDetail(option.id)
-			
 		}
 	}
 </script>
@@ -142,7 +170,8 @@
 	.shop {
 		padding: 40rpx;
 		background-color: #F8F8F8;
-
+		// width: 710rpx;
+		overflow-x: hidden; /* 禁止左右滚动 */
 		&-body {
 			margin-top: 100rpx;
 			// width: 90%;
@@ -193,11 +222,8 @@
 			width: 750rpx;
 			margin-left: -40rpx;
 			&-body{
-<<<<<<< HEAD
-=======
 				font-weight: 500;
->>>>>>> 8de3a0dedf2420e45a5838381524e0149ae3f7a8
-				width: 100%;
+				width: 88%;
 			}
 		}
 

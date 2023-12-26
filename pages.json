@@ -7,63 +7,63 @@
 		{
 			"path": "pages/index/shop",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "商城",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/index/user",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/index/guide",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "攻略",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/shop/shop",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "商城详情",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/login/register",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "注册",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/login/login",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "登录",
 				"enablePullDownRefresh": false
 			}
 
 		},{
 			"path": "pages/guide/guide",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "攻略详情",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/order/order-confirm",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "订单确认",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/order/order-detail",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "订单详情",
 				"enablePullDownRefresh": false
 			}
 
@@ -72,7 +72,7 @@
             "path" : "pages/date/date",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "日期选择",
                 "enablePullDownRefresh": false
             }
             
@@ -81,7 +81,7 @@
             "path" : "pages/protocols/protocols",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "协议",
                 "enablePullDownRefresh": false
             }
             

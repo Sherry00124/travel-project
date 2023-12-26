@@ -152,7 +152,6 @@
 			},
 			getTabbarList() {
 				getNavList().then(res => {
-					console.log(res)
 					this.switchTab = res
 				})
 			}

@@ -24,6 +24,18 @@
 	width: 750rpx;
 	position: absolute;
 }
+.navbar-bg{
+	// background-image: url('/static/shop/bg.svg');
+	// background-repeat: no-repeat;
+	// background-size: cover;
+	background: linear-gradient(to right, #FCE2CB, #FED772);
+	z-index: 999;
+	width: 750rpx;
+	height: 44px;
+	position: fixed;
+	top: 0;
+	left:0;
+}
 .line {
 	height: 32rpx;
 	border: solid 2rpx #d9d9d9;
