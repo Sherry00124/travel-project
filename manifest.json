@@ -59,7 +59,10 @@
                 }
             }
         },
-        "template" : "seo.html"
+        "template" : "seo.html",
+        "router" : {
+            "mode" : "hash"
+        }
     },
     /* 快应用特有相关 */
     "quickapp" : {},
