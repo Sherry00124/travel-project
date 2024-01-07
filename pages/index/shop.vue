@@ -60,7 +60,7 @@
 				baseList: [],
 				list: [],
 				pageNum: 1,
-				totalPage: 2,
+				totalPage: 1,
 				pageSize: 10,
 				type_id: 1,
 				
@@ -97,13 +97,15 @@
 					type_id: this.type_id
 				}
 				getShopList(page).then(res => {
-					this.list = res.list.data
+					res.list.data.forEach(item=>{
+						this.list.push(item)
+					})
+					this.totalPage = res.list.last_page
 				})
 			},
 			getNavList() {
 				getNav().then(res => {
 					this.baseList = res.data
-					console.log(this.baseList)
 				})
 			}
 		},

@@ -23,6 +23,7 @@
 			<text class="guide-content-disclaimer">免责声明：本文来自平台创作者，不代表平台立场，如有侵权请联系平台删除</text>
 			</view>
 		</view>
+		<firstAid />
 	</view>
 </template>
 

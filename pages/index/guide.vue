@@ -6,7 +6,7 @@
 				<u-grid :border="false"  col="2">
 					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
 						<view class="guide-item" @click="choose(baseListItem.id)">
-							<img :src="baseListItem.face" alt="" width="100%" >
+							<img :src="baseListItem.face" alt="" width="100%" height="130">
 							<!-- <u-icon :customStyle="{marginBottom:5+'rpx'}" :name="baseListItem.name" :size="120"></u-icon> -->
 							<text class="guide-item-content">{{baseListItem.name}}</text>
 							<view class="guide-item-bottom flex-row">
@@ -41,9 +41,6 @@
 					url: '/pages/guide/guide?id='+id
 				})
 			},
-			onShow(){
-			  this.getGuide();	
-			},
 			touchBottom(){
 				if (this.pageNum >= this.totalPage) {
 					uni.showToast({
@@ -62,12 +59,15 @@
 				}
 				getGuideList(page).then(res=>{
 					this.totalPage = res.list.last_page
-					this.baseList=res.list.data
+					res.list.data.forEach(item=>{
+						this.baseList.push(item)
+					})
 				})
 			}
 		},
 		mounted() {
 			uni.hideTabBar()
+			this.getGuide();
 		}
 	}
 </script>
