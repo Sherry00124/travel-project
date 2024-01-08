@@ -3,14 +3,15 @@
 		<view class="container"></view>
 		<view class="guide">
 			<scroll-view scroll-y="true" class="scroll-view" @scrolltolower="touchBottom">
-				<u-grid :border="false"  col="2">
+				<u-grid :border="false" col="2" >
 					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
 						<view class="guide-item" @click="choose(baseListItem.id)">
 							<img :src="baseListItem.face" alt="" width="100%" height="130">
 							<!-- <u-icon :customStyle="{marginBottom:5+'rpx'}" :name="baseListItem.name" :size="120"></u-icon> -->
 							<text class="guide-item-content">{{baseListItem.name}}</text>
 							<view class="guide-item-bottom flex-row">
-								<img :src="baseListItem.face" alt="" width="16rpx" height="16rpx" class="guide-item-bottom-avater">
+								<img :src="baseListItem.face" alt="" width="16rpx" height="16rpx"
+									class="guide-item-bottom-avater">
 								<text class="guide-item-bottom-name">{{baseListItem.author}}</text>
 							</view>
 						</view>
@@ -20,46 +21,53 @@
 		</view>
 		<firstAid />
 		<tabbar :currentTab='1' />
-		<ICP/>
+		<ICP />
 	</view>
 </template>
 
 <script>
-	import {getGuideList} from '@/api/guide.js'
+	import {
+		getGuideList
+	} from '@/api/guide.js'
 	export default {
 		data() {
 			return {
 				baseList: [],
-				pageNum:1,
-				totalPage:1,
-				pageSize:6
+				pageNum: 1,
+				totalPage: 1,
+				pageSize: 6
 			}
 		},
 		methods: {
 			choose(id) {
 				uni.navigateTo({
-					url: '/pages/guide/guide?id='+id
+					url: '/pages/guide/guide?id=' + id
 				})
 			},
-			touchBottom(){
+			touchBottom() {
 				if (this.pageNum >= this.totalPage) {
 					uni.showToast({
-						title:"没有更多",
-						icon:'none'
+						title: "没有更多",
+						icon: 'none'
 					})
 				} else {
 					this.pageNum++;
 					this.getGuide()
+					uni.showLoading({
+						mask:true,
+						title:'刷新中'
+					})
 				}
 			},
-			getGuide(){
+			getGuide() {
 				let page = {
-					page:this.pageNum,
-					perPage:this.pageSize
+					page: this.pageNum,
+					perPage: this.pageSize
 				}
-				getGuideList(page).then(res=>{
+				getGuideList(page).then(res => {
+					uni.hideLoading()
 					this.totalPage = res.list.last_page
-					res.list.data.forEach(item=>{
+					res.list.data.forEach(item => {
 						this.baseList.push(item)
 					})
 				})
@@ -76,6 +84,7 @@
 	.guide {
 		padding: 40rpx;
 		background-color: #F8F8F8;
+
 		&-item {
 			background-color: #fff;
 			width: 270rpx;
@@ -95,7 +104,7 @@
 				text-overflow: ellipsis;
 				-webkit-line-clamp: 2;
 				margin: 16rpx 0;
-
+				min-height: 40px;
 			}
 
 			&-bottom {

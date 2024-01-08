@@ -1,6 +1,6 @@
 <template>
-	<view class="content">
-		<text>备案专用</text>
+	<view class="content" @click="redirectToExternalUrl">
+		<text>京ICP备2024042182号-1</text>
 	</view>
 </template>
 
@@ -11,7 +11,13 @@
 			return {
 				
 			};
-		}
+		},
+		 methods: {
+		    redirectToExternalUrl() {
+		      // 使用 window.location.href 进行外部URL跳转
+			   window.open('https://beian.miit.gov.cn/', '_blank');
+		    }
+		  }
 	}
 </script>
 

@@ -13,7 +13,12 @@
 			</view>
 			<view class="shop-body">
 				<scroll-view scroll-y="true" class="scroll-view" @scrolltolower="touchBottom">
-					<view class="flex-row shop-body-item" v-for="(item,index) in list" @click="toDetails(item.id)">
+					<view class="shop-body-item" v-if="list.length == 0" style="display: flex;align-items: center;justify-content: center;">
+						<u-empty mode="data" text="">
+						</u-empty>
+					</view>
+					<view class="flex-row shop-body-item" v-for="(item,index) in list" @click="toDetails(item.id)"
+						v-else>
 						<view class="shop-body-img">
 							<img :src="item.images[0]" alt="" class="shop-body-item-img">
 							<view class="shop-body-departures">
@@ -38,7 +43,9 @@
 							</view>
 						</view>
 					</view>
+
 				</scroll-view>
+
 			</view>
 		</view>
 		<firstAid />
@@ -63,7 +70,7 @@
 				totalPage: 1,
 				pageSize: 10,
 				type_id: 1,
-				
+
 			}
 		},
 		watch: {
@@ -73,6 +80,7 @@
 		},
 		methods: {
 			chooseType(params) {
+				this.list = []
 				this.type_id = params.id
 			},
 			toDetails(id) {
@@ -87,6 +95,10 @@
 						icon: 'none'
 					})
 				} else {
+					uni.showLoading({
+						mask: true,
+						title: '刷新中'
+					})
 					this.getShopList()
 				}
 			},
@@ -97,9 +109,10 @@
 					type_id: this.type_id
 				}
 				getShopList(page).then(res => {
-					res.list.data.forEach(item=>{
+					res.list.data.forEach(item => {
 						this.list.push(item)
 					})
+					uni.hideLoading()
 					this.totalPage = res.list.last_page
 				})
 			},
@@ -113,13 +126,6 @@
 			uni.hideTabBar()
 			this.getShopList()
 			this.getNavList()
-			// uni.setNavigationBarTitle({
-			// 	title: '首页',
-			// 	success: () => {
-			// 		console.log('修改标题成功')
-			// 	},
-
-			// })
 		}
 	}
 </script>
