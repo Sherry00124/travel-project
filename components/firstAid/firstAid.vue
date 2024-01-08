@@ -23,8 +23,9 @@
 
 <style>
 	.firstAid {
-		position: absolute;
+		position: fixed;
 		right: 0;
 		top: 800rpx;
+		z-index: 5;
 	}
 </style>

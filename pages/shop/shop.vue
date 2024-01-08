@@ -23,7 +23,7 @@
 					<!-- <view class="shop-details-tags">{{tags}}</view> -->
 				</view>
 			</view>
-			<view class="shop-date flex-column">
+			<!-- <view class="shop-date flex-column">
 				<view class="flex-between">
 					<view class="flex-row">
 						<view class="" style="margin-right: 5rpx;">
@@ -52,7 +52,7 @@
 						<text>更多日期</text>
 					</view>
 				</view>
-			</view>
+			</view> -->
 			<view class="shop-content">
 				<view class="">产品详情</view>
 				<view class="shop-content-body">
