@@ -58,6 +58,9 @@
 				<view class="shop-content-body">
 					<u-parse :content="content"></u-parse>
 				</view>
+				<view class="shop-content-bottom">
+					<span style="position: fixed;bottom: 0;font-size: 10rpx;">tabbar</span>
+				</view>
 			</view>
 		</view>
 		<view class="shop-tabbar flex-row">
@@ -170,7 +173,7 @@
 	.shop {
 		padding: 40rpx;
 		background-color: #F8F8F8;
-		// width: 710rpx;
+		z-index: 2;
 		overflow-x: hidden; /* 禁止左右滚动 */
 		&-body {
 			margin-top: 100rpx;
@@ -212,6 +215,7 @@
 		}
 
 		&-content {
+			z-index: 2;
 			background-color: #fff;
 			border-radius: 16rpx;
 			height: 200rpx;
@@ -221,9 +225,13 @@
 			padding: 40rpx;
 			width: 750rpx;
 			margin-left: -40rpx;
+			margin-bottom: 180rpx;
 			&-body{
 				font-weight: 500;
 				width: 88%;
+			}
+			&-bottom{
+				height: 150rpx;
 			}
 		}
 
@@ -269,7 +277,7 @@
 			width: 750rpx;
 			background-color: #fff;
 			padding: 0 40rpx;
-
+			z-index: 3;
 			&-icon {
 				width: 20%
 			}

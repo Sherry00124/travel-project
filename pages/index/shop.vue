@@ -49,7 +49,7 @@
 			</view>
 		</view>
 		<firstAid />
-		<tabbar :currentTab='0' />
+		<tabbar :currentTab='tabIndex' />
 		<ICP />
 	</view>
 </template>
@@ -59,7 +59,7 @@
 		getShopList
 	} from '@/api/shop.js'
 	import {
-		getNav
+		getNav,getNavList
 	} from '@/api/nav.js'
 	export default {
 		data() {
@@ -70,7 +70,7 @@
 				totalPage: 1,
 				pageSize: 10,
 				type_id: 1,
-
+				tabIndex:0
 			}
 		},
 		watch: {
@@ -119,6 +119,15 @@
 			getNavList() {
 				getNav().then(res => {
 					this.baseList = res.data
+				})
+				
+				getNavList().then(res => {
+					res.forEach((item, index) => {
+						if (item.id === 1) {
+							this.tabIndex = index // 如果你仍然想在找到后终止循环，可以在这里加上 return
+						}
+					});
+				
 				})
 			}
 		},

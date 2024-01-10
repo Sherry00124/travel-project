@@ -188,7 +188,7 @@
 			</view>
 		</view>
 		<firstAid />
-		<tabbar :currentTab='2' />
+		<tabbar :currentTab='tabIndex' />
 		<ICP />
 	</view>
 </template>
@@ -198,7 +198,7 @@
 		getShopList
 	} from '@/api/shop.js'
 	import {
-		getNav
+		getNavList
 	} from '@/api/nav.js'
 	export default {
 		data() {
@@ -209,7 +209,7 @@
 				totalPage: 1,
 				pageSize: 10,
 				type_id: 1,
-				
+				tabIndex:2
 			}
 		},
 		watch: {
@@ -250,14 +250,20 @@
 				})
 			},
 			getNavList() {
-				getNav().then(res => {
-					this.baseList = res.data
+				getNavList().then(res => {
+					res.forEach((item, index) => {
+						if (item.id === 3) {
+							this.tabIndex = index // 如果你仍然想在找到后终止循环，可以在这里加上 return
+						}
+					});
+				
 				})
 			}
 		},
 		mounted() {
 			uni.hideTabBar()
 			this.getShopList()
+			this.getNavList()
 		}
 	}
 </script>

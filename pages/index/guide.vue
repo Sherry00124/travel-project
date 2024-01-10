@@ -3,7 +3,7 @@
 		<view class="container"></view>
 		<view class="guide">
 			<scroll-view scroll-y="true" class="scroll-view" @scrolltolower="touchBottom">
-				<u-grid :border="false" col="2" >
+				<u-grid :border="false" col="2">
 					<u-grid-item v-for="(baseListItem,baseListIndex) in baseList" :key="baseListIndex">
 						<view class="guide-item" @click="choose(baseListItem.id)">
 							<img :src="baseListItem.face" alt="" width="100%" height="130">
@@ -20,7 +20,7 @@
 			</scroll-view>
 		</view>
 		<firstAid />
-		<tabbar :currentTab='1' />
+		<tabbar :currentTab='tabIndex' />
 		<ICP />
 	</view>
 </template>
@@ -29,13 +29,18 @@
 	import {
 		getGuideList
 	} from '@/api/guide.js'
+	import {
+		getNavList
+	} from '@/api/nav.js'
 	export default {
 		data() {
 			return {
 				baseList: [],
 				pageNum: 1,
 				totalPage: 1,
-				pageSize: 6
+				pageSize: 6,
+				navList: [],
+				tabIndex:1
 			}
 		},
 		methods: {
@@ -54,8 +59,8 @@
 					this.pageNum++;
 					this.getGuide()
 					uni.showLoading({
-						mask:true,
-						title:'刷新中'
+						mask: true,
+						title: '刷新中'
 					})
 				}
 			},
@@ -71,11 +76,21 @@
 						this.baseList.push(item)
 					})
 				})
-			}
+			},
+			getNavList() {
+				getNavList().then(res => {
+					res.forEach((item, index) => {
+						if (item.id === 2) {
+							this.tabIndex = index // 如果你仍然想在找到后终止循环，可以在这里加上 return
+						}
+					});
+				})
+			},
 		},
 		mounted() {
 			uni.hideTabBar()
 			this.getGuide();
+			this.getNavList()
 		}
 	}
 </script>

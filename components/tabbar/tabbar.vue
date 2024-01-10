@@ -1,6 +1,5 @@
 <template>
 	<view class="content" >
-		
 		<u-tabbar :value="currentTab" :placeholder="false" :safeAreaInsetBottom="true" class="tab-bar"
 			activeColor="#55aaff" :border="false" >
 			<u-tabbar-item @click="click1(item)" v-for="(item,index) in switchTab">
@@ -12,110 +11,8 @@
 					<image class="u-page__item__slot-icon" :src="'/static/tabbar/' + getPath(item) + '_in.svg'"></image>
 					<text class="inactive-text">{{item.name}}</text>
 				</div>
-			
 			</u-tabbar-item>
-			
-			<!-- <u-tabbar-item @click="click1" v-if="switchTab[0].name=='商城'">
-				<div class="tabbar-icon flex-column" slot="active-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/shop_act.svg"></image>
-					<text class="active-text">{{switchTab[0].name}}</text>
-				</div>
-				<div class="tabbar-icon flex-column" slot="inactive-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/shop_in.svg"></image>
-					<text class="inactive-text">{{switchTab[0].name}}</text>
-				</div>
-
-			</u-tabbar-item>
-			<u-tabbar-item @click="click1" v-else-if="switchTab[0].name=='攻略'">
-				<div class="tabbar-icon flex-column" slot="active-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/edit_act.svg"></image>
-					<text class="active-text">{{switchTab[0].name}}</text>
-				</div>
-				<div class="tabbar-icon flex-column" slot="inactive-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/edit_in.svg"></image>
-					<text class="inactive-text">{{switchTab[0].name}}</text>
-				</div>
-
-			</u-tabbar-item>
-			<u-tabbar-item @click="click1" v-else-if="switchTab[0].name=='我的'">
-				<div class="tabbar-icon flex-column" slot="active-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/user_act.svg"></image>
-					<text class="active-text">{{switchTab[0].name}}</text>
-				</div>
-				<div class="tabbar-icon flex-column" slot="inactive-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/user_in.svg"></image>
-					<text class="inactive-text">{{switchTab[0].name}}</text>
-				</div>
-
-			</u-tabbar-item>
-			<u-tabbar-item @click="click1" v-if="switchTab[1].name=='商城'">
-				<div class="tabbar-icon flex-column" slot="active-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/shop_act.svg"></image>
-					<text class="active-text">{{switchTab[1].name}}</text>
-				</div>
-				<div class="tabbar-icon flex-column" slot="inactive-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/shop_in.svg"></image>
-					<text class="inactive-text">{{switchTab[1].name}}</text>
-				</div>
-			
-			</u-tabbar-item>
-			<u-tabbar-item @click="click1" v-else-if="switchTab[1].name=='攻略'">
-				<div class="tabbar-icon flex-column" slot="active-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/edit_act.svg"></image>
-					<text class="active-text">{{switchTab[1].name}}</text>
-				</div>
-				<div class="tabbar-icon flex-column" slot="inactive-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/edit_in.svg"></image>
-					<text class="inactive-text">{{switchTab[1].name}}</text>
-				</div>
-			
-			</u-tabbar-item>
-			<u-tabbar-item @click="click1" v-else-if="switchTab[1].name=='我的'">
-				<div class="tabbar-icon flex-column" slot="active-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/user_act.svg"></image>
-					<text class="active-text">{{switchTab[1].name}}</text>
-				</div>
-				<div class="tabbar-icon flex-column" slot="inactive-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/user_in.svg"></image>
-					<text class="inactive-text">{{switchTab[1].name}}</text>
-				</div>
-			
-			</u-tabbar-item>
-			<u-tabbar-item @click="click1" v-if="switchTab[2].name=='商城'">
-				<div class="tabbar-icon flex-column" slot="active-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/shop_act.svg"></image>
-					<text class="active-text">{{switchTab[2].name}}</text>
-				</div>
-				<div class="tabbar-icon flex-column" slot="inactive-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/shop_in.svg"></image>
-					<text class="inactive-text">{{switchTab[2].name}}</text>
-				</div>
-			
-			</u-tabbar-item>
-			<u-tabbar-item @click="click1" v-else-if="switchTab[2].name=='攻略'">
-				<div class="tabbar-icon flex-column" slot="active-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/edit_act.svg"></image>
-					<text class="active-text">{{switchTab[2].name}}</text>
-				</div>
-				<div class="tabbar-icon flex-column" slot="inactive-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/edit_in.svg"></image>
-					<text class="inactive-text">{{switchTab[2].name}}</text>
-				</div>
-			
-			</u-tabbar-item>
-			<u-tabbar-item @click="click1" v-else-if="switchTab[2].name=='我的'">
-				<div class="tabbar-icon flex-column" slot="active-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/user_act.svg"></image>
-					<text class="active-text">{{switchTab[2].name}}</text>
-				</div>
-				<div class="tabbar-icon flex-column" slot="inactive-icon">
-					<image class="u-page__item__slot-icon" src="/static/tabbar/user_in.svg"></image>
-					<text class="inactive-text">{{switchTab[2].name}}</text>
-				</div>
-			
-			</u-tabbar-item> -->
 		</u-tabbar>
-		
 	</view>
 </template>
 
