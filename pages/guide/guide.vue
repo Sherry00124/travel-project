@@ -48,9 +48,10 @@
 				})
 			},
 			leftClick(){
-				uni.switchTab({
-					url:'/pages/index/guide'
-				})
+				// uni.switchTab({
+				// 	url:'/pages/index/guide'
+				// })
+				uni.navigateBack()
 			}
 		},
 		onLoad(option) {

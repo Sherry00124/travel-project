@@ -101,9 +101,10 @@
 				this.show = false
 			},
 			leftClick(){
-				uni.switchTab({
-					url:'/pages/index/shop'
-				})
+				// uni.switchTab({
+				// 	url:'/pages/index/shop'
+				// })
+				uni.navigateBack()
 			},
 			toCalendar(){
 				uni.navigateTo({
