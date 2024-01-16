@@ -157,35 +157,33 @@
 	<view class="">
 		<view class="container"></view>
 		<view class="shop flex-column">
-			<view class="shop-body">
-				<scroll-view scroll-y="true" class="scroll-view">
-					<view class="flex-row shop-body-item" v-for="(item,index) in list" @click="toDetails(item.id)">
-						<view class="shop-body-img">
-							<img :src="item.images[0]" alt="" class="shop-body-item-img">
-							<view class="shop-body-departures">
-								{{item.diqu_tags}}
-							</view>
-							<view class="shop-body-tourType">{{item.type_tags}}</view>
+			<scroll-view scroll-y="true" class="scroll-view">
+				<view class="flex-row shop-body-item" v-for="(item,index) in list" @click="toDetails(item.id)">
+					<view class="shop-body-img">
+						<img :src="item.images[0]" alt="" class="shop-body-item-img">
+						<view class="shop-body-departures">
+							{{item.diqu_tags}}
 						</view>
-						<view class="flex-column">
-							<text class="shop-body-item-title">{{item.name}}</text>
-							<text class="shop-body-item-price">￥{{item.product_price}}起</text>
-							<view class="shop-body-item-bottom">
-								<view class="flex-between" style="width: 400rpx;">
-									<view class="flex-row">
-										<u-icon name="/static/shop/shop.svg" :size="18"></u-icon>
-										<text class="shop-body-item-ins">{{item.title}}</text>
-									</view>
-									<view class="flex-row" style="font-size: 28rpx;">
-										<text style="margin-right: 5rpx;">评分</text>
-										<text class="shop-body-item-num">{{item.scores}}</text>
-									</view>
+						<view class="shop-body-tourType">{{item.type_tags}}</view>
+					</view>
+					<view class="flex-column">
+						<text class="shop-body-item-title">{{item.name}}</text>
+						<text class="shop-body-item-price">￥{{item.product_price}}起</text>
+						<view class="shop-body-item-bottom">
+							<view class="flex-between" style="width: 400rpx;">
+								<view class="flex-row">
+									<u-icon name="/static/shop/shop.svg" :size="18"></u-icon>
+									<text class="shop-body-item-ins">{{item.title}}</text>
+								</view>
+								<view class="flex-row" style="font-size: 28rpx;">
+									<text style="margin-right: 5rpx;">评分</text>
+									<text class="shop-body-item-num">{{item.scores}}</text>
 								</view>
 							</view>
 						</view>
 					</view>
-				</scroll-view>
-			</view>
+				</view>
+			</scroll-view>
 		</view>
 		<firstAid />
 		<tabbar :currentTab='tabIndex' />
@@ -389,6 +387,6 @@
 	.scroll-view {
 		width: 100%;
 		height: 90vh;
-		margin-bottom: 100rpx;
+		margin-bottom: 120rpx;
 	}
 </style>
