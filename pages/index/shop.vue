@@ -75,6 +75,7 @@
 		},
 		watch: {
 			type_id(newValue, oldValue) {
+				
 				this.getShopList()
 			}
 		},
@@ -82,6 +83,7 @@
 			chooseType(params) {
 				this.list = []
 				this.type_id = params.id
+				this.pageNum=1
 			},
 			toDetails(id) {
 				uni.navigateTo({
@@ -95,6 +97,7 @@
 						icon: 'none'
 					})
 				} else {
+					this.pageNum++;
 					uni.showLoading({
 						mask: true,
 						title: '刷新中'

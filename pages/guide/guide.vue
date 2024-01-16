@@ -2,7 +2,7 @@
 	<view>
 		<view class="container"></view>
 		<view class="navbar-bg" >
-			<u-navbar title="攻略" :autoBack="true" bgColor="transparent" @leftClick="leftClick">
+			<u-navbar title="攻略" :autoBack="true" bgColor="transparent" >
 			</u-navbar>
 		</view>
 		<view class="guide">

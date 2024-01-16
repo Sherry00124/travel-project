@@ -195,7 +195,7 @@
 
 <script>
 	import {
-		getShopList
+		getShopList,shopNewList
 	} from '@/api/shop.js'
 	import {
 		getNavList
@@ -233,6 +233,11 @@
 						icon: 'none'
 					})
 				} else {
+					this.pageNum++;
+					uni.showLoading({
+						mask: true,
+						title: '刷新中'
+					})
 					this.getShopList()
 				}
 			},
@@ -240,12 +245,12 @@
 				let page = {
 					page: this.pageNum,
 					perPage: this.pageSize,
-					type_id: this.type_id
 				}
-				getShopList(page).then(res => {
+				shopNewList(page).then(res => {
 					res.list.data.forEach(item=>{
 						this.list.push(item)
 					})
+					uni.hideLoading()
 					this.totalPage = res.list.last_page
 				})
 			},
@@ -382,6 +387,8 @@
 	}
 
 	.scroll-view {
-		height: 70vh;
+		width: 100%;
+		height: 90vh;
+		margin-bottom: 100rpx;
 	}
 </style>

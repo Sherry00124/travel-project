@@ -3,7 +3,7 @@
 		<view class="container"></view>
 		<view class="shop flex-column">
 			<view class="navbar-bg" >
-				<u-navbar :title="title" :autoBack="true" @leftClick="leftClick" bgColor="transparent">
+				<u-navbar :title="title" :autoBack="true"  bgColor="transparent">
 				</u-navbar>
 			</view>
 			<view class="shop-body">
@@ -76,6 +76,7 @@
 
 <script>
 	import {shopDetail} from '@/api/shop.js'
+	
 	export default {
 		data() {
 			return {

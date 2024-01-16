@@ -8,12 +8,12 @@
 		<view>
 			<u-popup :show="showBusinessLicense" @close="showBusinessLicense=false" mode="center">
 				<view>
-					<img src="/static/liscence/business.jfif" width="320" alt="">
+					<img src="/static/liscence/agency.jfif" width="380" alt="">
 				</view>
 			</u-popup>
 			<u-popup :show="showTravelAgency" @close="showTravelAgency=false" mode="center">
 				<view>
-					<img src="/static/liscence/agency.jfif" width="320" alt="">
+					<img src="/static/liscence/business.jfif" width="380" alt="">
 				</view>
 			</u-popup>
 		</view>
