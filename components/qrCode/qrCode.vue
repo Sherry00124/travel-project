@@ -42,7 +42,6 @@
 			},
 			getConfigInfo() {
 				getConfig().then(res => {
-					console.log(res)
 					this.qrCode = res.data[0].qrcode
 				})
 			},
