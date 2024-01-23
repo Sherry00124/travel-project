@@ -11,7 +11,7 @@
 				<view class="container-body-item-header"> {{item.type_tags}} </view>
 				<div class="container-body-item-body flex-row">
 					<img :src="item.images[0]" width="100" height="100" alt="" />
-					<view class="flex-column" style="justify-content: space-between;">
+					<view class="flex-column">
 						<span class="container-body-item-body-title">{{ item.name }}</span>
 						<view class="container-body-item-tag">
 							<Tags :id="item.id" />
@@ -23,17 +23,18 @@
 								<img src="/static/landingPage/yuan.png" width="20" height="20" alt="" />
 								<span style="font-size: 25rpx; font-weight: 400; color: #7d2f3b">起</span>
 							</view>
-							<view class="container-body-item-btn" @click="show=true">查看详情</view>
+							<view class="container-body-item-btn" @click="toDetails(item)">查看详情</view>
 						</view>
 					</view>
 				</div>
 			</view>
 		</view>
 		<view class="container-footer flex-between">
-			<img :src="qrCode" width="110" alt="" />
-			<img src="/static/landingPage/word.png" width="150" alt="" />
+			<img :src="qrCode" width="100" alt="" />
+			<img src="/static/landingPage/word.png" width="120" alt="" />
 		</view>
 		<qrCode :show="show" @close="close" />
+		<ICP />
 	</view>
 </template>
 
@@ -87,7 +88,12 @@
 			},
 			close(params) {
 				this.show = params
-			}
+			},
+			toDetails(id) {
+				uni.navigateTo({
+					url: '/pages/shop/shop?id=' + id
+				})
+			},
 
 		},
 	};
