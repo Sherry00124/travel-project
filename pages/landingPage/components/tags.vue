@@ -36,7 +36,7 @@
 	.grid-container {
 	    display: grid;
 	    grid-template-columns: repeat(2, 1fr); /* 将容器分为两列，每列宽度相等 */
-	    grid-gap: 20px; /* 设置列之间的间隔，根据需要进行调整 */
+	    grid-gap: 5rpx; /* 设置列之间的间隔，根据需要进行调整 */
 	    /* 其他样式，如边距等，可以根据需要进行调整 */
 	}
 	.tags {

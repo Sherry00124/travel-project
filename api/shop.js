@@ -33,3 +33,13 @@ export function shopNewList(data) {
 		})
 	});
 }
+
+export function getShopTgList() {
+  return new Promise((resolve, reject) => {
+    request({
+      url: `/user/shopTgList`,
+    }).then((res) => {
+      resolve(res);
+    });
+  });
+}

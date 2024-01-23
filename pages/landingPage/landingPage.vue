@@ -23,15 +23,15 @@
 								<img src="/static/landingPage/yuan.png" width="20" height="20" alt="" />
 								<span style="font-size: 25rpx; font-weight: 400; color: #7d2f3b">起</span>
 							</view>
-							<view class="container-body-item-btn" @click="toDetails(item)">查看详情</view>
+							<view class="container-body-item-btn" @click="toDetails(item.id)">查看详情</view>
 						</view>
 					</view>
 				</div>
 			</view>
 		</view>
 		<view class="container-footer flex-between">
-			<img :src="qrCode" width="100" alt="" />
-			<img src="/static/landingPage/word.png" width="120" alt="" />
+			<img :src="qrCode" width="100" height="100" alt="" />
+			<img src="/static/landingPage/word.png" width="130" height="100" alt="" />
 		</view>
 		<qrCode :show="show" @close="close" />
 		<ICP />
@@ -41,7 +41,7 @@
 <script>
 	import {
 		shopNewList,
-		shopDetail
+		getShopTgList
 	} from "@/api/shop.js";
 	import {
 		getConfig
@@ -68,17 +68,9 @@
 		},
 		methods: {
 			getShopList() {
-				let page = {
-					page: this.pageNum,
-					perPage: this.pageSize,
-				};
-				shopNewList(page).then((res) => {
-					// res.list.data.forEach((item) => {
-					// 	this.list.push(item);
-					// });
-					this.list = res.list.data.slice(0, 2)
+				getShopTgList().then((res) => {
+					this.list = res.list
 					uni.hideLoading();
-					this.totalPage = res.list.last_page;
 				});
 			},
 			getConfigInfo() {
@@ -122,7 +114,7 @@
 
 		&-footer {
 			width: 80%;
-			margin-top: 30rpx;
+			
 		}
 
 		&-body {
@@ -146,7 +138,7 @@
 					/* 设置左边距为50% */
 					transform: translateX(-50%);
 					width: 350rpx;
-					height: 70rpx;
+					height: 60rpx;
 					color: #fff;
 					background-image: url("../../static/landingPage/bg_title.png");
 					background-repeat: no-repeat;
@@ -169,10 +161,10 @@
 				}
 
 				&-body {
-					margin-top: 50rpx;
+					margin-top: 40rpx;
 
 					&-title {
-						font-size: 36rpx;
+						font-size: 30rpx;
 						font-weight: 600;
 						color: #7d2f3b;
 						display: -webkit-box;
@@ -183,7 +175,7 @@
 					}
 
 					&-price {
-						font-size: 36rpx;
+						font-size: 30rpx;
 						font-weight: 600;
 						background: radial-gradient(#eba754 0%, #ff6940 50%, #dc5bc3 100%);
 						-webkit-background-clip: text;

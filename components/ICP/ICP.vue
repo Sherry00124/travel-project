@@ -50,6 +50,7 @@
 		font-size: 22rpx;
 		background-color: #adadad;
 		width: 750rpx;
+		left: 0;
 
 	}
 </style>
