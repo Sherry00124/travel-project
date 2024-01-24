@@ -12,15 +12,16 @@
 	} from "@/api/shop.js";
 	export default {
 		name: "Tags",
-		props: ['id'],
+		props: ['data'],
 		data() {
 			return {
 				tags: []
 			};
 		},
 		mounted() {
-			this.getShopDetail()
+			this.tags = this.data.intro.split("\n");
 		},
+		
 		methods: {
 			getShopDetail() {
 				shopDetail(this.id).then(res => {

@@ -17,7 +17,7 @@
                 item.name
               }}</span>
               <view class="container-body-item-tag">
-                <Tags :id="item.id" />
+                <Tags :data="item" />
               </view>
 
               <view class="flex-between" style="width: 400rpx">
@@ -82,7 +82,9 @@ export default {
   methods: {
     getShopList() {
       getShopTgList().then((res) => {
-        this.list = res.list.data;
+        console.log(res.data.list.data);
+        this.list = res.data.list.data;
+
         uni.hideLoading();
       });
     },
@@ -126,6 +128,7 @@ export default {
 
   &-footer {
     width: 80%;
+    margin-top: 20rpx;
   }
 
   &-body {
@@ -203,6 +206,6 @@ export default {
 }
 
 .scroll-view {
-  height: 300rpx;
+  height: 600rpx;
 }
 </style>
