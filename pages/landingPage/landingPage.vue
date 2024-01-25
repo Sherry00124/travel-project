@@ -20,7 +20,7 @@
                 <Tags :data="item" />
               </view>
 
-              <view class="flex-between" style="width: 400rpx">
+              <view class="flex-between" style="width: 380rpx">
                 <view class="flex-row" style="align-items: flex-end">
                   <view class="container-body-item-body-price"
                     >￥{{ item.product_price }}</view
@@ -110,16 +110,16 @@ export default {
   background-image: url("../../static/landingPage/bg.png");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: calc(100vh - 40rpx);
   width: 100%;
   padding: 20rpx 0rpx;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   position: relative;
 
   //   position: relative;
   &-header {
-    height: 350rpx;
+    height: 480rpx;
     color: #fff;
     font-size: 75rpx;
     font-weight: bold;
@@ -128,7 +128,8 @@ export default {
 
   &-footer {
     width: 80%;
-    margin-top: 20rpx;
+    bottom: 45rpx;
+	position: absolute;
   }
 
   &-body {
@@ -206,6 +207,6 @@ export default {
 }
 
 .scroll-view {
-  height: 600rpx;
+  height: 650rpx;
 }
 </style>

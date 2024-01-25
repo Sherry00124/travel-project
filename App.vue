@@ -34,9 +34,12 @@ export default {
       // 使用正则表达式匹配 "referrer" 参数的值
       const match = url.match(new RegExp(`[?&]${key}=([^&]+)`));
       // 判断是否匹配到参数
+	        const currentUrl = new URL(window.location.href);
+	        // 获取主机部分
+	        const host = currentUrl.hostname;
       const referrerValue = match ? match[1] : null;
       if (referrerValue) {
-        createCollection({ resouce_url: referrerValue, uname: uname }).then(
+        createCollection({ resouce_url: referrerValue, uname: uname , domain_url: host,}).then(
           (res) => {
             this.id = res.id;
           }
