@@ -11,7 +11,7 @@
 				<view class="flex-between guide-body-subtitle" style="margin: 30rpx 0;">
 					<view class="flex-row" style="align-items: center;">
 						<view class="guide-body-avatar">
-							<u-avatar text="北" fontSize="15" size="30" randomBgColor></u-avatar>
+							<u-avatar :src="avatar" fontSize="15" size="30" randomBgColor></u-avatar>
 						</view>
 						<text class="guide-body-author">{{author}}</text>
 					</view>
@@ -35,7 +35,8 @@
 				title: "",
 				author: '',
 				time: '',
-				content: ""
+				content: "",
+				avatar:''
 			};
 		},
 		methods:{
@@ -45,6 +46,7 @@
 					this.author = res.data.author
 					this.time = res.data.fabu_at
 					this.content=res.data.content
+					this.avatar = res.data.face
 				})
 			},
 			leftClick(){
