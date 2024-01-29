@@ -29,30 +29,46 @@
 		</noscript>
 		<div id="app"></div>
 		<!-- built files will be auto injected -->
-			<script type="text/javascript">
-		    (function (d, src, c) { var t = d.scripts[d.scripts.length - 1], s = d.createElement('script'); s.id = 'la_x2s6df8d'; s.defer = true; s.src = src; s.onload = s.onreadystatechange = function () { var rs = this.readyState; if (rs && (rs != 'complete') && (rs != 'loaded')) { return; } c(this); }; t.parentElement.insertBefore(s, t.nextSibling); })(document,
-		      'https://thaitour.ladesk.com/scripts/track.js',
-		      function (e) { LiveAgent.createButton('rpi31bo7', e); });
-		  </script>
-			<script>
-			 function isWechat() {
-		    return /MicroMessenger/i.test(window.navigator.userAgent);
-		}
-		        const currentUrl = window.location.href;
-		            // 移动端，地址包含"/pc/"
-		            if (!isWechat()&&/Mobi/.test(navigator.userAgent) && currentUrl.indexOf('/pc/') !== -1) {
-		                window.location.href = 'https://exotictravelvip.com';
-		                
-		            }
-		
-		            // PC 端，地址包含"/h5/"
-		            if (!isWechat()&&/Windows NT|Macintosh/.test(navigator.userAgent) && currentUrl.indexOf('/h5/') !== -1) {
-		    window.location.href = 'https://exotictravelvip.com';
-		    
-		}
+		<script type="text/javascript">
+			(function(d, src, c) {
+				var t = d.scripts[d.scripts.length - 1],
+					s = d.createElement('script');
+				s.id = 'la_x2s6df8d';
+				s.defer = true;
+				s.src = src;
+				s.onload = s.onreadystatechange = function() {
+					var rs = this.readyState;
+					if (rs && (rs != 'complete') && (rs != 'loaded')) {
+						return;
+					}
+					c(this);
+				};
+				t.parentElement.insertBefore(s, t.nextSibling);
+			})(document,
+				'https://thaitour.ladesk.com/scripts/track.js',
+				function(e) {
+					LiveAgent.createButton('rpi31bo7', e);
+				});
+		</script>
+		<script>
+			function isWechat() {
+				return /MicroMessenger/i.test(window.navigator.userAgent);
+			}
+			const currentUrl = window.location.href;
+			// 移动端，地址包含"/pc/"
+			if (!isWechat() && /Mobi/.test(navigator.userAgent) && currentUrl.indexOf('/pc/') !== -1) {
+				window.location.href = 'https://exotictravelvip.com';
+
+			}
+
+			// PC 端，地址包含"/h5/"
+			if (!isWechat() && /Windows NT|Macintosh/.test(navigator.userAgent) && currentUrl.indexOf('/h5/') !== -1) {
+				window.location.href = 'https://exotictravelvip.com';
+
+			}
 			// 使用原生 JavaScript 进行异步数据获取
 			async function fetchData() {
-				
+
 				try {
 					// 发起 HTTP GET 请求获取数据
 					const response = await fetch('https://www.exotictravelvip.com/api/user/systemConfig');

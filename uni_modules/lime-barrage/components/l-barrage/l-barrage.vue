@@ -1,12 +1,14 @@
 <template>
 	<view class="l-barrage" :style="[styles, props.lStyle]">
-		<!-- #ifdef VUE3 -->
-		<template v-for="item in list" :key="item.id">
+		
+		<view v-for="item in list" :key="item.id">
 			<!-- IOS不能动态offset -->
+			{{item}}
 			<view 
 				class="l-barrage-item" 
 				v-if="item && item.style.opacity && !item.style['--l-barrage-offset']" 
 				:id="item.id">
+				
 				<slot :content="item.content" />
 			</view>
 			<view
@@ -22,8 +24,8 @@
 				@touchend="touchend(item)">
 				<slot :content="item.content" />
 			</view>
-		</template>
-		<!-- #endif -->	
+		</view>
+		
 		<!-- #ifndef VUE3 -->
 		<!-- 微信小程序在vue2删除会闪 IOS不能动态offset -->
 		<block v-for="item in list" :key="item.id">
@@ -117,6 +119,7 @@
 				list.value.push(node)
 			}
 			onMounted(() => {
+				console.log(props.data)
 				getRect('.l-barrage', { context: app.proxy }).then(container => {
 					if (container) {
 						barrage = new Barrage({

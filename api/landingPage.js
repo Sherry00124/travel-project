@@ -9,3 +9,13 @@ export function getList() {
     });
   });
 }
+
+export function getbullet() {
+  return new Promise((resolve, reject) => {
+    request({
+      url: `/user/bannerText`,
+    }).then((res) => {
+      resolve(res.data);
+    });
+  });
+}

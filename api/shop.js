@@ -39,7 +39,6 @@ export function getShopTgList() {
     request({
       url: `/user/shopTgList`,
     }).then((res) => {
-      console.log(res);
       resolve(res);
     });
   });

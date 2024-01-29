@@ -4,6 +4,8 @@ import config from './common/config.js'
 import uView from "uview-ui";
 Vue.use(uView);
 
+
+
 if (process.env.NODE_ENV === 'development') {
 	config.baseURL = "http://111.229.146.166/api"
 } else {
@@ -12,6 +14,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // #ifndef VUE3
 import Vue from 'vue'
+
 import './uni.promisify.adaptor'
 Vue.config.productionTip = false
 App.mpType = 'app'
