@@ -37,8 +37,8 @@
 			</scroll-view>
 		</view>
 		<view class="container-footer flex-between">
-			<img :src="qrCode" width="100" height="100" alt="" />
-			<img src="/static/landingPage/word.png" width="130" height="100" alt="" />
+			<img :src="qrCode" height="100" alt="" />
+			<img src="/static/landingPage/word.png" height="80" alt="" />
 		</view>
 		<qrCode :show="show" @close="close" />
 		<ICP />
@@ -71,7 +71,7 @@
 				const: '',
 				pause: false,
 				showArea: 'top',
-				listData:[]
+				listData: []
 			};
 		},
 		components: {
@@ -82,7 +82,7 @@
 			this.getShopList();
 			this.getConfigInfo();
 			this.getBullet()
-			
+
 		},
 		methods: {
 			getShopList() {
@@ -107,12 +107,14 @@
 			},
 			getBullet() {
 				getbullet().then(res => {
-					res.list.forEach((item)=>{
-						this.$refs.lffBarrage.add({item:item});
+					res.list.forEach((item) => {
+						this.$refs.lffBarrage.add({
+							item: item
+						});
 					})
 				})
 			},
-			
+
 		},
 	};
 </script>
@@ -139,9 +141,13 @@
 		}
 
 		&-footer {
-			width: 80%;
+			width: 95%;
 			bottom: 45rpx;
 			position: absolute;
+			align-items: center;
+			img {
+				object-fit: cover;
+			}
 		}
 
 		&-body {
@@ -228,6 +234,6 @@
 	}
 
 	.scroll-view {
-		height: 650rpx;
+		height: 660rpx;
 	}
 </style>
