@@ -9,7 +9,7 @@ Vue.use(uView);
 if (process.env.NODE_ENV === 'development') {
 	config.baseURL = "http://111.229.146.166/api"
 } else {
-	config.baseURL = "http://111.229.146.166/api"
+	config.baseURL = "https://exotictravelvip.com/api"
 }
 
 // #ifndef VUE3
