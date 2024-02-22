@@ -95,6 +95,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/landingPage/landingPage1/landingPage1",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
