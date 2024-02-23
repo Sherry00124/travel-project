@@ -110,21 +110,21 @@
 			<view class="body-3 flex-between">
 				<view class="flex-column" style="width: 40%;">
 					<span style="font-weight: bold;font-size: 23rpx;color: #FFFFFF;">南航：7月20/27/30/31日 8月13/15/17日</span>
-					<view class="btn-2 flex-row">
+					<view class="btn-2 flex-row" @click="toDetails">
 						<span style="margin-right: 10rpx;">去官网逛逛</span>
 						<u-icon name="/static/landingPage/1/arraw.png" size="13"></u-icon>
 					</view>
 				</view>
 				<view class="flex-column" style="align-items: center;">
-					<u-icon name="/static/landingPage/1/qrcode1.png" size="60"></u-icon>
+					<img src="/static/landingPage/1/qrcode1.png" width="60" height="60"/>
 					<span class="qrcode-content"> 导游微信</span>
 				</view>
 				<view class="flex-column" style="align-items: center;">
-					<u-icon name="/static/landingPage/1/qrcode2.png" size="60"></u-icon>
+					<img name="/static/landingPage/1/qrcode2.png" width="60" height="60"/>
 					<span class="qrcode-content"> 定制师微信</span>
 				</view>
 				<view class="flex-column" style="align-items: center;">
-					<u-icon name="/static/landingPage/1/qrcode3.png" size="60"></u-icon>
+					<img name="/static/landingPage/1/qrcode3.png" width="60" height="60"/>
 					<span class="qrcode-content"> 地接团队</span>
 				</view>
 			</view>
@@ -170,12 +170,19 @@
 				]
 			};
 		},
+		methods:{
+			toDetails() {
+				uni.switchTab({
+					url: "/pages/index/shop",
+				});
+			},
+		}
 	};
 </script>
 
 <style lang="scss">
 	.bg {
-		background-image: url("../../../static/landingPage/1/bg.png");
+		background-image: url("../../../static/landingPage/1/bg.jpg");
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
 		width: 750rpx;
@@ -231,11 +238,11 @@
 			margin: 0 30rpx;
 			margin-top: 460rpx;
 			position: absolute;
-			bottom: 10rpx;
+			bottom: 20rpx;
 		}
 
 		&-3 {
-			margin: 0 30rpx;
+			
 			
 		}
 	}
@@ -260,8 +267,9 @@
 		font-weight: bold;
 		font-size: 20rpx;
 		color: #2162B2;
-		margin: 30rpx 20rpx;
-		padding: 10rpx;
+		margin: 30rpx 0rpx;
+		
+		padding: 20rpx;
 	}
 
 	.btn-2 {
