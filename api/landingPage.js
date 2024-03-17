@@ -19,3 +19,15 @@ export function getbullet() {
     });
   });
 }
+
+export function contactAdd(data) {
+  return new Promise((resolve, reject) => {
+    request({
+      url: `/user/ContactAdd`,
+	  method: 'POST',
+	  data:JSON.stringify(data),
+    }).then((res) => {
+      resolve(res.data);
+    });
+  });
+}
