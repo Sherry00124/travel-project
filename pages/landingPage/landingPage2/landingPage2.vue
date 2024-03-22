@@ -30,7 +30,7 @@
 						<text class="text_5">GOGOBAR街区</text>
 					</view>
 					<view class="text-wrapper_4 flex-col">
-						<text class="text_6">地下选妃市场</text>
+						<text class="text_6">泰语老师海选</text>
 					</view>
 					<view class="group_3 flex-row" @click="book">
 						<text class="text_7">立即订制</text>
@@ -112,7 +112,7 @@
 					</view>
 					<view class="box_4 flex-row">
 						<view class="text-group_3 flex-col justify-between">
-							<text class="text_29">地下选妃市场</text>
+							<text class="text_29">泰语老师海选</text>
 							<text class="text_30">119元/人起</text>
 						</view>
 					</view>
@@ -178,13 +178,13 @@
 			}
 		},
 		onShow() {
-			const screenWidth = window.screen.width;
-			let baseFontSize;
+			// const screenWidth = window.screen.width;
+			// let baseFontSize;
 			
-			baseFontSize = screenWidth / 1920 * 16
+			// baseFontSize = screenWidth / 1920 * 16
 			
-			// document.documentElement.style.fontSize = baseFontSize + 'px';
-			 document.getElementsByTagName("html")[0].style.cssText = 'font-size: ' + baseFontSize + "px";
+			// // document.documentElement.style.fontSize = baseFontSize + 'px';
+			//  document.getElementsByTagName("html")[0].style.cssText = 'font-size: ' + baseFontSize + "px";
 			setTimeout(() => {
 				var video = document.querySelector(".video");
 				video.style.display = "block";
@@ -193,7 +193,80 @@
 		},
 		mounted() {
 			// this.htmlFontSize()
+			/*
+			    作者:helang
+			    此版本应用于 750px尺寸的 iOS 设计稿
+			    rem计算方式：设计图尺寸px / 100 = 实际rem  【例: 100px = 1rem，32px = 0.32rem】
+			 */
+			// !function (window) {
+			//     /* 设计图文档宽度 */
+			//     var docWidth = 1920;
+			//     var doc = window.document,
+			//         docEl = doc.documentElement,
+			//         resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+			//     var recalc = (function refreshRem () {
+			//         /* 窗口当前宽度，取整数 */
+			//         var clientWidth = Math.floor(window.innerWidth);
+			//         /* 页面宽度大于 设计图文档宽度 时不再放大 */
+			//         clientWidth = clientWidth > docWidth ? docWidth : clientWidth;
+			//         var oldSize = (clientWidth/docWidth*16) + 'px';
+			//         docEl.style.fontSize = oldSize;
 			
+			//         var isWechat = function (){
+			//             var _UA = window.navigator.userAgent;
+			//             if(/micromessenger/i.test(_UA.match(/MicroMessenger/i))) {
+			//                 return true;
+			//             }
+			//             return false;
+			//         }
+			//         /* 获取设置后的字体大小情况 - 因微信设置APP字体大小后会影响该设置 */
+			//         if(isWechat()){
+			//             var nowSize = window.getComputedStyle(document.documentElement).fontSize;
+			//             var oldSizeValue = parseFloat(oldSize,10);
+			//             var nowSizeValue = parseFloat(nowSize,10);
+			
+			//             /* 当差值大于1时重新按差比计算出正确的px值 */
+			//             if((nowSizeValue - oldSizeValue) > 0.5 || (nowSizeValue - oldSizeValue) < -0.5){
+			//                 var diff = (oldSizeValue / nowSizeValue);
+			//                 docEl.style.fontSize = (clientWidth/docWidth*100*diff) + 'px';
+			//             }
+			//         }
+			        
+			//         return refreshRem;
+			//     })();
+			//     /* 添加倍屏标识，安卓为1 */
+			//     docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+			//     if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+			//         /* 添加IOS标识 */
+			//         doc.documentElement.classList.add('ios');
+			//         /* IOS8以上给html添加hairline样式，以便特殊处理 */
+			//         if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+			//             doc.documentElement.classList.add('hairline');
+			//     }
+			//     if (!doc.addEventListener) return;
+			//     window.addEventListener(resizeEvt, recalc, false);
+			//     doc.addEventListener('DOMContentLoaded', recalc, false);
+			// }(window);
+			     (function (w) {
+			            var resizeEvt =
+			                "orientationchange" in window ?
+			                    "orientationchange" :
+			                    "resize";
+			            var docEl = document.documentElement;
+			
+			            function resizeFn() {
+			
+			                var docW = docEl.clientWidth; 
+			
+			                if (docW > w) {
+			                    docW = w;
+			                }
+			                docEl.style.fontSize = (docW * 24) / w + "px";// 750px 的设计稿除 100 得到 rem
+			                console.log(docEl.style.fontSize)
+			            }
+			            resizeFn();
+			            window.addEventListener(resizeEvt, resizeFn);
+			        })(1920);
 		},
 		methods: {
 			book() {
@@ -314,7 +387,7 @@
 	}
 
 	.text_2 {
-		width: 15.25rem;
+		/* width: 15.25rem; */
 		/* 244px / 16 ≈ 15.25rem */
 		height: 1.69rem;
 		/* 27px / 16 ≈ 1.69rem */
@@ -371,7 +444,7 @@
 	}
 
 	.text_3 {
-		width: 7rem;
+		/* width: 7rem; */
 		/* 112px / 16 ≈ 7rem */
 		height: 1.438rem;
 		/* 23px / 16 ≈ 1.438rem */
@@ -403,7 +476,7 @@
 	}
 
 	.text_4 {
-		width: 7.563rem;
+		/* width: 7.563rem; */
 		/* 121px / 16 ≈ 7.563rem */
 		height: 1.438rem;
 		/* 23px / 16 ≈ 1.438rem */
@@ -433,7 +506,7 @@
 	}
 
 	.text_5 {
-		width: 9.938rem;
+		/* width: 9.938rem; */
 		/* 159px / 16 ≈ 9.938rem */
 		height: 1.438rem;
 		/* 23px / 16 ≈ 1.438rem */
@@ -463,7 +536,7 @@
 	}
 
 	.text_6 {
-		width: 8.438rem;
+		/* width: 8.438rem; */
 		/* 135px / 16 ≈ 8.438rem */
 		height: 1.438rem;
 		/* 23px / 16 ≈ 1.438rem */
@@ -901,7 +974,7 @@
 
 
 	.text_18 {
-		width: 9.563rem;
+		/* width: 9.563rem; */
 		/* 153px / 16 ≈ 9.563rem */
 		height: 1.375rem;
 		/* 22px / 16 ≈ 1.375rem */
@@ -937,7 +1010,7 @@
 	}
 
 	.text_20 {
-		width: 18.125rem;
+		/* width: 18.125rem; */
 		/* 290px / 16 ≈ 18.125rem */
 		height: 1.688rem;
 		/* 27px / 16 ≈ 1.688rem */
@@ -1166,7 +1239,7 @@
 		/* 406px / 16 ≈ 25.375rem */
 		height: 33.188rem;
 		/* 531px / 16 ≈ 33.188rem */
-		background: url('../../../static/landingPage/2/pic6.png') 100% no-repeat;
+		background: url('../../../static/landingPage/2/pic7.png') 100% no-repeat;
 		background-size: 100% 100%;
 		margin-left: 0.625rem;
 		/* 10px / 16 ≈ 0.625rem */
