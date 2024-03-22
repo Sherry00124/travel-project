@@ -1,5 +1,9 @@
 <template>
+	<!-- <u-navbar title="" :autoBack="true">
+		<view slot="left"><u-icon name="arrow-leftward" size="20"></u-icon></view>
+	</u-navbar> -->
 	<view class="page flex-col">
+		
 		<view class="group_1 flex-col">
 			<view class="image-wrapper_1 flex-col">
 				<image class="image_1" src="/static/landingPage/2/text1.png" mode="aspectFit" />
@@ -173,22 +177,22 @@
 				},
 			}
 		},
-		onLaunch() {
-			// this.setCustomViewport();
-		},
 		onShow() {
 			const screenWidth = window.screen.width;
 			let baseFontSize;
-
+			
 			baseFontSize = screenWidth / 1920 * 16
-
-			document.documentElement.style.fontSize = baseFontSize + 'px';
-
+			
+			// document.documentElement.style.fontSize = baseFontSize + 'px';
+			 document.getElementsByTagName("html")[0].style.cssText = 'font-size: ' + baseFontSize + "px";
 			setTimeout(() => {
 				var video = document.querySelector(".video");
 				video.style.display = "block";
 				// video.load(); // 手动触发视频加载
 			}, 1500)
+		},
+		mounted() {
+			// this.htmlFontSize()
 			
 		},
 		methods: {
@@ -198,7 +202,9 @@
 				contactAdd(this.model1.userInfo).then(res=>{
 					this.show=false
 				})
-			}
+			},
+			
+			
 		}
 	}
 </script>
@@ -222,7 +228,7 @@
 		position: relative;
 		width: 120rem;
 		/* 1920px / 16px */
-		height: 262.5rem;
+		/* height: 262.5rem; */
 		/* 4200px / 16px */
 		overflow: hidden;
 	}
